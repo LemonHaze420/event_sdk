@@ -7,7 +7,8 @@
 */
 #include "../event_lib/common.h"
 
-#define LOG debug_log_to_screen
+#define LOG(...)        debug_log_to_file_REMOVED(__VA_ARGS__);  \
+                        debug_log_to_screen(__VA_ARGS__)
 
 void debug_log_to_file_REMOVED(char* szFormat, ...);
 void debug_log_to_screen(char* szFormat, ...);
@@ -15,7 +16,9 @@ void debug_log_to_screen(char* szFormat, ...);
 static void controller_input_task(void);
 
 void start(void) 
-{                
+{
+        LOG("Reverse engineered, designed, developed and created by LemonHaze - 2022\n");
+        
         FUN_0c1329a0(1);
         FUN_0c132f20(0);
         FUN_0c1b0500(1);
@@ -31,7 +34,7 @@ void start(void)
 }
 static void controller_input_task(void) {
         uint controller_input = EVT_GetControllerInput(0,0);
-        debug_log_to_screen("controller_input = 0x%x\n", controller_input);
+        LOG("controller_input = 0x%x\n", controller_input);
         if (controller_input & START)
                 CleanupCurrentTask();        
         return;
