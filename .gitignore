@@ -30,8 +30,8 @@ _ReSharper*/
 .vs/
 #Nuget packages folder
 packages/
-.elf
-.bin
-.EV1
-.EV2
-.EV3
+*.elf
+*.bin
+*.EV1
+*.EV2
+*.EV3
