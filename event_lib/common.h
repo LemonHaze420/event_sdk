@@ -2,6 +2,8 @@
 #define _COMMON_H
 
 #include "offsets.h"
+//#include "event_fn_tbl.h"
+#include <stdarg.h>
 
 // Button input values
 #define UP      0x1000
@@ -35,6 +37,9 @@ typedef unsigned int            undefined4;
 typedef unsigned long long      undefined8;
 typedef unsigned short          ushort;
 typedef unsigned short          word;
+
+#define FOURCC(a,b,c,d)         (unsigned int)(d << 24 | c << 16 | b << 8 | a)
+#define GEN_NOP                 __asm("nop\n\t")
 
 typedef enum AFSUtilMode {
     MOUNT_AFS_PARTITION=0,
@@ -112,26 +117,51 @@ typedef struct HLib_Task {
     undefined4 field44_0x38;
 } HLib_Task;
 
-static HLib_Task*       (*HLib_EnqueueTaskWithoutParameter)(void *callbackFn, char _r8b, undefined nextFunctionIndex, unsigned int taskToken)   = (void*)ENQUEUETASK_OFFS;
-static int*             (*Shenmue_evl_AFS_Utils)(undefined4 param_1,AFSUtilMode param_2,char *param_3,uint *param_4,undefined4 param_5)        = (void*)EVL_AFS_UTILS_OFFS;
-static int*             (*Shenmue_Filepath_Generator)(FilepathGenMode path_type)        = (void*) FILEPATH_GEN_OFFS;
-static void*            (*HLib_GetTaskParameterPointer)(int*)                           = (void*) GETTASKPARAM_OFFS;
+// --------------------------------------------------------------------------------------------------------------------------------------------
 
-static void             (*CleanupCurrentTask)(void)                                     = (void*) CLEANUP_CURTASK_OFFS;
-
-static void             (*debug_log_to_file_REMOVED)(char* szFormat, ...)               = (void*) DEBUG_LOG_TO_FILE_OFFS;
-static void             (*debug_log_to_screen)(char* szFormat, ...)                     = (void*) DEBUG_LOG_TO_SCR_OFFS;
-
-static ushort           (*EVT_GetControllerInput)(uint param_1,undefined4 param_2)      = (void*) EVT_GetControllerInput_OFFS;
-
-void (*FUN_0c1329a0)(int mode) = (void*)(0x0c1329a0);
-void (*FUN_0c132f20)(int mode) = (void*)(0x0c132f20);
-void (*FUN_0c1b0500)(int mode) = (void*)(0x0c1b0500);
-void (*FUN_0c1b0640)(int mode) = (void*)(0x0c1b0640);
-void (*FUN_0c1b0b40)() = (void*)(0x0c1b0b40);
-void (*FUN_0c1220c0)() = (void*)(0x0c1220c0);
-void (*FUN_0c0949e0)(HLib_Task*) = (void*)(0x0c0949e0);
-void (*FUN_0c0c01c0)(uint,uint) = (void*)(0x0c0c01c0);
-void (*FUN_0c0c0020)(uint,uint) = (void*)(0x0c0c0020);
-
+static inline __attribute__((always_inline)) HLib_Task*       HLib_EnqueueTaskWithoutParameter(void *callbackFn, char _r8b, undefined nextFunctionIndex, unsigned int taskToken)   {
+        return ((HLib_Task* (*)(void *, char, undefined, unsigned int))(void*)TBL_ADDR(279)) (callbackFn, _r8b, nextFunctionIndex, taskToken);
+}
+static inline __attribute__((always_inline)) int*       Shenmue_evl_AFS_Utils(undefined4 param_1,AFSUtilMode param_2,char *param_3,uint *param_4,undefined4 param_5)   {
+        return ((int* (*)(undefined4 ,AFSUtilMode ,char *,uint *,undefined4 ))(void*)TBL_ADDR(254)) (param_1,param_2,param_3,param_4,param_5);
+}
+static inline __attribute__((always_inline)) char*       Shenmue_Filepath_Generator(FilepathGenMode path_type)   {
+        return ((char* (*)(FilepathGenMode))(void*)TBL_ADDR(423)) (path_type);
+}
+static inline __attribute__((always_inline)) void*       HLib_GetTaskParameterPointer(int* p1)   {
+        return ((void* (*)(int*))(void*)TBL_ADDR(283)) (p1);
+}
+static inline __attribute__((always_inline)) void       CleanupCurrentTask()   {
+        ((void (*)(void))(void*)TBL_ADDR(282)) ();
+}
+static inline __attribute__((always_inline)) ushort       EVT_GetControllerInput(uint param_1,undefined4 param_2)   {
+        return ((ushort (*)(uint ,undefined4 ))(void*)TBL_ADDR(50)) (param_1, param_2);
+}
+static inline __attribute__((always_inline)) void       FUN_0c1329a0(int mode)   {
+        ((void (*)(int))(void*)TBL_ADDR(67)) (mode);
+}
+static inline __attribute__((always_inline)) void       FUN_0c132f20(int mode)   {
+        ((void (*)(int))(void*)TBL_ADDR(68)) (mode);
+}
+static inline __attribute__((always_inline)) void       FUN_0c1b0500(int mode)   {
+        ((void (*)(int))(void*)TBL_ADDR(318)) (mode);
+}
+static inline __attribute__((always_inline)) void       FUN_0c1b0640(int mode)   {
+        ((void (*)(int))(void*)TBL_ADDR(322)) (mode);
+}
+static inline __attribute__((always_inline)) void       FUN_0c1b0b40()   {
+        ((void (*)(void))(void*)TBL_ADDR(320)) ();
+}
+static inline __attribute__((always_inline)) void       FUN_0c1220c0()   {
+        ((void (*)(void))(void*)TBL_ADDR(14)) ();
+}
+static inline __attribute__((always_inline)) void       FUN_0c0949e0(HLib_Task* TASK)   {
+        ((void (*)(HLib_Task*))(void*)TBL_ADDR(128)) (TASK);
+}
+static inline __attribute__((always_inline)) void       FUN_0c0c01c0(uint p1, uint p2)   {
+        ((void (*)(uint,uint))(void*)TBL_ADDR(105)) (p1,p2);
+}
+static inline __attribute__((always_inline)) void       FUN_0c0c0020(uint p1, uint p2)   {
+        ((void (*)(uint,uint))(void*)TBL_ADDR(104)) (p1,p2);
+}
 #endif

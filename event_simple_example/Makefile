@@ -35,7 +35,7 @@ TARGET=event.$(TYPE)
 all: rm-elf $(TARGET)
 
 event.elf: main.c
-	$(CC) -e _start -o $@ main.c -nostartfiles -nostdlib -Ttext=$(VMA) -Wa,-I./
+	$(CC) -e _start -o $@ main.c -nostartfiles -nostdlib -Ttext=$(VMA) -Wa,-I./ -I/usr/include/
 
 event.$(TYPE): event.elf
 	$(OBJCOPY) $^ $@
