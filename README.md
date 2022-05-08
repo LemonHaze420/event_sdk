@@ -45,7 +45,7 @@ You should now have a working development environment to run `make` in any of th
 
 ## Build
 
-To build..
+Building the scripts is as easy as invoking `make` in a directory containing the included sample Makefile. In order to build..
 
 an EV1:
     ```
@@ -66,8 +66,19 @@ an EV3:
 
 There are a few limitations and unresolved issues which still require some work. 
 
-  * the examples and SDK code currently uses hard-coded function offsets which means it only supports the build i am currently working on. we can change this to use the event function table and using only indexes for that table, which will give us compatibility with all known Shenmue 2 Dreamcast builds.
+  * ~~the examples and SDK code currently uses hard-coded function offsets which means it only supports the build i am currently working on. we can change this to use the event function table and using only indexes for that table, which will give us compatibility with all known Shenmue 2 Dreamcast builds.~~ - Moved all functions which can be into inlined functions which calculate the fn address before calling. Should support all builds now (tested with US and GameJam).
   * absolutely no support for tasks with parameters and completely missing any heap space memory management functions. this is useful for sharing data between tasks etc.
   * the function calls in the simple example are probably 90% not required/useful, so tracking down the function responsible for relinquishing control back to the user and ultimately removing the loading screen needs to be identified.
-  * the location of `start` (the entrypoint) needs to be fixed at 0x0. this can be done thru linker flags. for now, any pure functions defined by our code must be explicitly forward declared and must be placed after `start` to ensure that it is always at 0x0 in the resulting binary.
+  * ~~the location of `start` (the entrypoint) needs to be fixed at 0x0. this can be done thru linker flags. for now, any pure functions defined by our code must be explicitly forward declared and must be placed after `start` to ensure that it is always at 0x0 in the resulting binary.~~ - Written up a simple linker script which puts `.text.main` above everything else. Should be fixed now.
   * ... and likely countless more, except these are the most important for now.
+
+## Limitations
+
+Event scripts in Shenmue II are limited by their size. 
+The size constraints are as follows:-
+
+| Type |   Size  |
+|------|---------|
+| EV1  | 0x10000 | 
+| EV2  | 0x10000 |
+| EV3  | 0x18000 |
