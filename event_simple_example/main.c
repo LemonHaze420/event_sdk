@@ -4,50 +4,51 @@
         Name:           Simple Example
         Description:    Loads the area and creates a task which draws the controller_input data to the screen.
                         Pressing the START button destroys the task and stops execution.
+                        
+                        Additionally, when built for & used on the Game Jam build, the UP button toggles UI rendering.
 */
+
+#define GAME_JAM
+
 #include "../event_lib/common.h"
 
-#define LOG(...)        debug_log_to_file_REMOVED(__VA_ARGS__);  \
-                        debug_log_to_screen(__VA_ARGS__)
-
-void debug_log_to_file_REMOVED(char* szFormat, ...);
-void debug_log_to_screen(char* szFormat, ...);
-
 static void controller_input_task(void);
+static unsigned int task_executed = 0;
 
-void start(void) 
+void _entry start(void) 
 {
-        LOG("Reverse engineered, designed, developed and created by LemonHaze - 2022\n");
-        
-        FUN_0c1329a0(1);
-        FUN_0c132f20(0);
-        FUN_0c1b0500(1);
-        FUN_0c1b0640(0);
-        FUN_0c1b0b40();
- 
-        HLib_Task* p_controller_input_task = HLib_EnqueueTaskWithoutParameter(controller_input_task, 0x04, 0xb, FOURCC('E','V','N','T'));
-        FUN_0c0c01c0(0,2);
-        FUN_0c0c0020(0,1);
-        FUN_0c0949e0(p_controller_input_task);
-        FUN_0c1220c0();
+        task_executed = 0;
+        dev_load_scene(controller_input_task);
         return;
 }
+
+#ifdef GAME_JAM
+static void ToggleUI()
+{
+        char curr_val = *(char*)(0x0C303D94);        
+        if (curr_val != 255 && curr_val >= 0) {
+            *(char*)(0x0C303D94) = 255;
+            return;
+        } else {
+            *(char*)(0x0C303D94) = 0;     
+            return;
+        }
+}
+#endif
+
 static void controller_input_task(void) {
         uint controller_input = EVT_GetControllerInput(0,0);
-        LOG("controller_input = 0x%x\n", controller_input);
+        set_debug_screen_text_position(4,4);
+        LOG("task_executed      = 0x%x\n", task_executed);
+        LOG("controller_input   = 0x%x\n", controller_input);
         if (controller_input & START)
-                CleanupCurrentTask();        
+                CleanupCurrentTask();
+#       ifdef GAME_JAM
+        if (controller_input & UP) {
+                ToggleUI();
+                sleep(1);
+        }
+#       endif
+        task_executed++;
         return;
-}
-void debug_log_to_file_REMOVED(char* szFormat, ...)   
-{
-        void *arg = __builtin_apply_args();
-        void *ret = __builtin_apply((void*)TBL_ADDR(38), arg, 100);
-        __builtin_return(ret);
-}
-void debug_log_to_screen(char* szFormat, ...)   
-{
-        void *arg = __builtin_apply_args();
-        void *ret = __builtin_apply((void*)TBL_ADDR(40), arg, 100);
-        __builtin_return(ret);
 }

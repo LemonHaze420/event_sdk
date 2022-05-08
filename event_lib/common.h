@@ -3,7 +3,7 @@
 
 #include "offsets.h"
 //#include "event_fn_tbl.h"
-#include <stdarg.h>
+#include "mem.h"
 
 // Button input values
 #define UP      0x1000
@@ -38,8 +38,11 @@ typedef unsigned long long      undefined8;
 typedef unsigned short          ushort;
 typedef unsigned short          word;
 
+#define _entry                  __attribute__((section(".text.main"))) 
+
 #define FOURCC(a,b,c,d)         (unsigned int)(d << 24 | c << 16 | b << 8 | a)
-#define GEN_NOP                 __asm("nop\n\t")
+#define LOG(...)                debug_log_to_file_REMOVED(__VA_ARGS__);  \
+                                debug_log_to_screen(__VA_ARGS__)
 
 typedef enum AFSUtilMode {
     MOUNT_AFS_PARTITION=0,
@@ -119,49 +122,101 @@ typedef struct HLib_Task {
 
 // --------------------------------------------------------------------------------------------------------------------------------------------
 
-static inline __attribute__((always_inline)) HLib_Task*       HLib_EnqueueTaskWithoutParameter(void *callbackFn, char _r8b, undefined nextFunctionIndex, unsigned int taskToken)   {
+__FORCEINLINE HLib_Task*      HLib_EnqueueTaskWithoutParameter(void *callbackFn, char _r8b, undefined nextFunctionIndex, unsigned int taskToken)   {
         return ((HLib_Task* (*)(void *, char, undefined, unsigned int))(void*)TBL_ADDR(279)) (callbackFn, _r8b, nextFunctionIndex, taskToken);
 }
-static inline __attribute__((always_inline)) int*       Shenmue_evl_AFS_Utils(undefined4 param_1,AFSUtilMode param_2,char *param_3,uint *param_4,undefined4 param_5)   {
+
+__FORCEINLINE int*            Shenmue_evl_AFS_Utils(undefined4 param_1,AFSUtilMode param_2,char *param_3,uint *param_4,undefined4 param_5)   {
         return ((int* (*)(undefined4 ,AFSUtilMode ,char *,uint *,undefined4 ))(void*)TBL_ADDR(254)) (param_1,param_2,param_3,param_4,param_5);
 }
-static inline __attribute__((always_inline)) char*       Shenmue_Filepath_Generator(FilepathGenMode path_type)   {
+
+__FORCEINLINE char*           Shenmue_Filepath_Generator(FilepathGenMode path_type)   {
         return ((char* (*)(FilepathGenMode))(void*)TBL_ADDR(423)) (path_type);
 }
-static inline __attribute__((always_inline)) void*       HLib_GetTaskParameterPointer(int* p1)   {
+
+__FORCEINLINE void*           HLib_GetTaskParameterPointer(int* p1)   {
         return ((void* (*)(int*))(void*)TBL_ADDR(283)) (p1);
 }
-static inline __attribute__((always_inline)) void       CleanupCurrentTask()   {
+
+__FORCEINLINE void            CleanupCurrentTask()   {
         ((void (*)(void))(void*)TBL_ADDR(282)) ();
 }
-static inline __attribute__((always_inline)) ushort       EVT_GetControllerInput(uint param_1,undefined4 param_2)   {
+
+__FORCEINLINE ushort          EVT_GetControllerInput(uint param_1,undefined4 param_2)   {
         return ((ushort (*)(uint ,undefined4 ))(void*)TBL_ADDR(50)) (param_1, param_2);
 }
-static inline __attribute__((always_inline)) void       FUN_0c1329a0(int mode)   {
+
+__FORCEINLINE void            FUN_0c1329a0(int mode)   {
         ((void (*)(int))(void*)TBL_ADDR(67)) (mode);
 }
-static inline __attribute__((always_inline)) void       FUN_0c132f20(int mode)   {
+
+__FORCEINLINE void            FUN_0c132f20(int mode)   {
         ((void (*)(int))(void*)TBL_ADDR(68)) (mode);
 }
-static inline __attribute__((always_inline)) void       FUN_0c1b0500(int mode)   {
+
+__FORCEINLINE void            FUN_0c1b0500(int mode)   {
         ((void (*)(int))(void*)TBL_ADDR(318)) (mode);
 }
-static inline __attribute__((always_inline)) void       FUN_0c1b0640(int mode)   {
+
+__FORCEINLINE void            FUN_0c1b0640(int mode)   {
         ((void (*)(int))(void*)TBL_ADDR(322)) (mode);
 }
-static inline __attribute__((always_inline)) void       FUN_0c1b0b40()   {
+
+__FORCEINLINE void            FUN_0c1b0b40()   {
         ((void (*)(void))(void*)TBL_ADDR(320)) ();
 }
-static inline __attribute__((always_inline)) void       FUN_0c1220c0()   {
+
+__FORCEINLINE void            FUN_0c1220c0()   {
         ((void (*)(void))(void*)TBL_ADDR(14)) ();
 }
-static inline __attribute__((always_inline)) void       FUN_0c0949e0(HLib_Task* TASK)   {
+
+__FORCEINLINE void            FUN_0c0949e0(HLib_Task* TASK)   {
         ((void (*)(HLib_Task*))(void*)TBL_ADDR(128)) (TASK);
 }
-static inline __attribute__((always_inline)) void       FUN_0c0c01c0(uint p1, uint p2)   {
+
+__FORCEINLINE void            FUN_0c0c01c0(uint p1, uint p2)   {
         ((void (*)(uint,uint))(void*)TBL_ADDR(105)) (p1,p2);
 }
-static inline __attribute__((always_inline)) void       FUN_0c0c0020(uint p1, uint p2)   {
+
+__FORCEINLINE void            FUN_0c0c0020(uint p1, uint p2)   {
         ((void (*)(uint,uint))(void*)TBL_ADDR(104)) (p1,p2);
 }
+
+__FORCEINLINE void            set_debug_screen_text_position(int x, int y)  {
+        ((void (*)(int,int))(void*)TBL_ADDR(39)) (x,y);
+}
+
+/* These functions cannot be inlined, by nature. */
+static void debug_log_to_file_REMOVED(char* szFormat, ...)   
+{
+        void *arg = __builtin_apply_args();
+        void *ret = __builtin_apply((void*)TBL_ADDR(38), arg, 100);
+        __builtin_return(ret);
+}
+
+static void debug_log_to_screen(char* szFormat, ...)   
+{
+        void *arg = __builtin_apply_args();
+        void *ret = __builtin_apply((void*)TBL_ADDR(40), arg, 100);
+        __builtin_return(ret);
+}
+
+/* Initializes the currently loaded scene and completes loading, then queues up a task with 
+   no parameter, using the callback function provided to this function. (for Development only) */
+__FORCEINLINE void dev_load_scene(void* callbackFn)
+{
+        LOG("Reverse engineered, designed, developed and created by LemonHaze - 2022\n");
+        FUN_0c1329a0(1);
+        FUN_0c132f20(0);
+        FUN_0c1b0500(1);
+        FUN_0c1b0640(0);
+        FUN_0c1b0b40();
+        
+        HLib_Task* p_controller_input_task = HLib_EnqueueTaskWithoutParameter(callbackFn, 0x04, 0xb, FOURCC('E','V','N','T'));
+        FUN_0c0c01c0(0,2);
+        FUN_0c0c0020(0,1);
+        FUN_0c0949e0(p_controller_input_task);
+        FUN_0c1220c0();   
+}
+
 #endif
