@@ -29,21 +29,6 @@ else
 endif
 
 CC=sh4-elf-gcc -ml -m4
+CFLAGS=-O2 -T ../event_lib/linker.x -nostartfiles -nostdlib -Wno-builtin-declaration-mismatch -fpic -Wa,-I./ -I/usr/include/ -I../event_lib/include -Ttext=$(VMA) 
 OBJCOPY=sh4-elf-objcopy --adjust-vma=$(VMA) -O binary -R .stack
 TARGET=event.$(TYPE)
-
-all: rm-elf $(TARGET)
-
-event.elf: main.c
-	$(CC) -T ../linker.x -o $@ main.c -nostartfiles -nostdlib -Wno-builtin-declaration-mismatch -fpic -Ttext=$(VMA) -Wa,-I./ -I/usr/include/
-
-event.$(TYPE): event.elf
-	$(OBJCOPY) $^ $@
-
-.PHONY : clean
-clean:
-	-rm -f $(TARGET) event.$(TYPE) event.elf $(OBJS)
-
-.PHONY : rm-elf
-rm-elf:
-	-rm -f $(TARGET) event.elf

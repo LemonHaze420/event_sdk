@@ -7,10 +7,8 @@
                         
                         Additionally, when built for & used on the Game Jam build, the UP button toggles UI rendering.
 */
-
-#define GAME_JAM
-
-#include "../event_lib/common.h"
+//#define GAME_JAM
+#include "common.h"
 
 static void controller_input_task(void);
 static unsigned int task_executed = 0;
