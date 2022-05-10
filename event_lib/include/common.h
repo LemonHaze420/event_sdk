@@ -146,7 +146,7 @@ __FORCEINLINE ushort          EVT_GetControllerInput(uint param_1,undefined4 par
         return ((ushort (*)(uint ,undefined4 ))(void*)TBL_ADDR(50)) (param_1, param_2);
 }
 
-__FORCEINLINE void            FUN_0c1329a0(int mode)   {
+__FORCEINLINE void            EV_SetPlayerControlFlags(int mode)   {
         ((void (*)(int))(void*)TBL_ADDR(67)) (mode);
 }
 
@@ -166,7 +166,7 @@ __FORCEINLINE void            FUN_0c1b0b40()   {
         ((void (*)(void))(void*)TBL_ADDR(320)) ();
 }
 
-__FORCEINLINE void            FUN_0c1220c0()   {
+__FORCEINLINE void            EV_FinishLoading()   {
         ((void (*)(void))(void*)TBL_ADDR(14)) ();
 }
 
@@ -206,17 +206,17 @@ static void debug_log_to_screen(char* szFormat, ...)
 __FORCEINLINE void dev_load_scene(void* callbackFn)
 {
         LOG("Reverse engineered, designed, developed and created by LemonHaze - 2022\n");
-        FUN_0c1329a0(1);
-        FUN_0c132f20(0);
-        FUN_0c1b0500(1);
-        FUN_0c1b0640(0);
-        FUN_0c1b0b40();
+        EV_SetPlayerControlFlags(1);
+        //FUN_0c132f20(0);                        //  unknown - unnecessary / debug-related
+        //FUN_0c1b0500(1);                        //  unknown - unnecessary / debug-related
+        //FUN_0c1b0640(0);
+        //FUN_0c1b0b40();                         //  unknown - unnecessary / debug-related
         
         HLib_Task* p_controller_input_task = HLib_EnqueueTaskWithoutParameter(callbackFn, 0x04, 0xb, FOURCC('E','V','N','T'));
-        FUN_0c0c01c0(0,2);
-        FUN_0c0c0020(0,1);
+        //FUN_0c0c01c0(0,2);                      //  unknown - unnecessary / debug-related
+        //FUN_0c0c0020(0,1);                      //  unknown - unnecessary / debug-related
         FUN_0c0949e0(p_controller_input_task);
-        FUN_0c1220c0();   
+        EV_FinishLoading();                       // removes loading screen etc.
 }
 
 #endif
