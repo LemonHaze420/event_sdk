@@ -1,11 +1,12 @@
 include ../event_lib/Makefile
+TARGET=simple_example.$(TYPE)
 
 all: rm-elf $(TARGET)
 
 simple_example.elf: main.c
 	$(CC) $(CFLAGS) -o $@ main.c 
 
-simple_example.$(TYPE): event.elf
+simple_example.$(TYPE): simple_example.elf
 	$(OBJCOPY) $^ $@
 
 .PHONY : clean
