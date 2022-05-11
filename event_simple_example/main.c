@@ -16,7 +16,7 @@ static unsigned int task_executed = 0;
 void _entry start(void) 
 {
         task_executed = 0;
-        dev_load_scene(controller_input_task);
+        load_scene(controller_input_task, 1);
         return;
 }
 
@@ -40,7 +40,7 @@ static void controller_input_task(void) {
         LOG("task_executed      = 0x%x\n", task_executed);
         LOG("controller_input   = 0x%x\n", controller_input);
         if (controller_input & START)
-                CleanupCurrentTask();
+                TaskCleanupCurrentTask();
 #       ifdef GAME_JAM
         if (controller_input & UP) {
                 ToggleUI();
