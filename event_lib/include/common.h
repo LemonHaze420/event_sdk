@@ -1,7 +1,5 @@
 #ifndef _COMMON_H
 #define _COMMON_H
-
-#include "offsets.h"
 #include "mem.h"
 
 // Button input values
@@ -43,6 +41,10 @@ typedef char                    string;
 #define FOURCC(a,b,c,d)         (unsigned int)(d << 24 | c << 16 | b << 8 | a)
 #define LOG(...)                debug_log_to_file_REMOVED(__VA_ARGS__);  \
                                 debug_log_to_screen(__VA_ARGS__)
+
+#define g_task_context_OFFS     0x0c020200-0xC
+#define EV_SCRIPT_FUNC_TBL_OFFS 0x0c020200
+#define TBL_ADDR(f)             *(int*)((EV_SCRIPT_FUNC_TBL_OFFS+(f*4)))
 
 typedef enum AFSUtilMode {
     MOUNT_AFS_PARTITION=0,
