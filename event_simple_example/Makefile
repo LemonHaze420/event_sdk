@@ -2,16 +2,16 @@ include ../event_lib/Makefile
 
 all: rm-elf $(TARGET)
 
-event.elf: main.c
+simple_example.elf: main.c
 	$(CC) $(CFLAGS) -o $@ main.c 
 
-event.$(TYPE): event.elf
+simple_example.$(TYPE): event.elf
 	$(OBJCOPY) $^ $@
 
 .PHONY : clean
 clean:
-	-rm -f $(TARGET) event.$(TYPE) event.elf $(OBJS)
+	-rm -f $(TARGET) simple_example.$(TYPE) simple_example.elf $(OBJS)
 
 .PHONY : rm-elf
 rm-elf:
-	-rm -f $(TARGET) event.elf
+	-rm -f $(TARGET) simple_example.elf
