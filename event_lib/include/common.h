@@ -1,80 +1,13 @@
 #ifndef _COMMON_H
 #define _COMMON_H
 #include "mem.h"
-
-// Button input values
-#define UP      0x1000
-#define DOWN    0x2000
-
-#define LEFT    0x4000
-#define RIGHT   0x8000
-
-#define A_BTN   0x400
-#define B_BTN   0x200
-#define X_BTN   0x4
-#define Y_BTN   0x2
-
-#define START   0x800
-
-#define LB      0x41
-#define RB      0x180
-
-#define RT      0x8
-
-typedef unsigned char           undefined;
-typedef unsigned char           bool;
-typedef unsigned char           byte;
-typedef long long               longlong;
-typedef unsigned char           uchar;
-typedef unsigned int            uint;
-typedef unsigned long long      ulonglong;
-typedef unsigned char           undefined1;
-typedef unsigned short          undefined2;
-typedef unsigned int            undefined4;
-typedef unsigned long long      undefined8;
-typedef unsigned short          ushort;
-typedef unsigned short          word;
-typedef char                    string;
+#include "event_tbl.h"
 
 #define _entry                  __attribute__((section(".text.main"))) 
 
 #define FOURCC(a,b,c,d)         (unsigned int)(d << 24 | c << 16 | b << 8 | a)
 #define LOG(...)                debug_log_to_file_REMOVED(__VA_ARGS__);  \
                                 debug_log_to_screen(__VA_ARGS__)
-
-#define g_task_context_OFFS     0x0c020200-0xC
-#define EV_SCRIPT_FUNC_TBL_OFFS 0x0c020200
-#define TBL_ADDR(f)             *(int*)((EV_SCRIPT_FUNC_TBL_OFFS+(f*4)))
-
-typedef enum AFSUtilMode {
-    MOUNT_AFS_PARTITION=0,
-    UNMOUNT_AFS_PARTITION=1,
-    WAIT_PAK_LOAD=2,
-    Unk3=3,
-    Unk4=4,
-    IsLoaded=5,
-    IsLoaded_6=6,
-    NewLoadPAK=7,
-    IsLoaded_8=8,
-    IsLoaded_9=9,
-    IsLoaded_A=10,
-    IsLoaded_B=11,
-    FREE_PAKFILE_AFS=12,
-    DESTROY_PAKFILE_AFS=13
-} AFSUtilMode;
-
-typedef enum FilepathGenMode {
-    SceneDirectory=0,
-    MiscDirectory=1,
-    SoundDirectory=2,
-    StreamDirectory=3,
-    SpriteDirectory=4,
-    ItemDirectory=5,
-    CharaDirectory=6,
-    PackDirectory=7
-} FilepathGenMode;
-
-#include "event_tbl.h"
 
 // --------------------------------------------------------------------------------------------------------------------------------------------
 
