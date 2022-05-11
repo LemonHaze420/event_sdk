@@ -6,4 +6,8 @@ SECTIONS
         *(.text.main);
         *(.text*);
     }
+    .data :
+    {
+        *(.data*);
+    }
 }
