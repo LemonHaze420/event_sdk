@@ -1489,8 +1489,8 @@ __FORCEINLINE void FUN_0c0943e0 (undefined4 param_1, undefined4 param_2, undefin
 		((void (*)(undefined4, undefined4, undefined2, undefined2, undefined4))(void*)TBL_ADDR(IDX_FUN_0c0943e0)) (param_1, param_2, param_3, param_4, param_5);
 }
 
-__FORCEINLINE void FUN_0c0989a0 (undefined4 param_1, uint param_2) {
-		((void (*)(undefined4, uint))(void*)TBL_ADDR(IDX_FUN_0c0989a0)) (param_1, param_2);
+__FORCEINLINE int FUN_0c0989a0 (undefined4 param_1, uint param_2) {
+		return ((int (*)(undefined4, uint))(void*)TBL_ADDR(IDX_FUN_0c0989a0)) (param_1, param_2);
 }
 
 __FORCEINLINE void FUN_0c0989c0 (undefined4 param_1, uint param_2, uint param_3) {
@@ -2513,8 +2513,8 @@ __FORCEINLINE undefined4 FUN_0c100440 (undefined4 param_1, undefined4 param_2, u
 		return ((undefined4 (*)(undefined4, undefined4, undefined8, undefined8, undefined8))(void*)TBL_ADDR(IDX_FUN_0c100440)) (param_1, param_2, param_3, param_4, param_5);
 }
 
-__FORCEINLINE undefined4 * Filepath_Generator (FilepathGenMode path_type) {
-		return ((undefined4 * (*)(FilepathGenMode))(void*)TBL_ADDR(IDX_Filepath_Generator)) (path_type);
+__FORCEINLINE char * Filepath_Generator (FilepathGenMode path_type) {
+		return ((char * (*)(FilepathGenMode))(void*)TBL_ADDR(IDX_Filepath_Generator)) (path_type);
 }
 
 __FORCEINLINE int FUN_0c164380 (char * param_1) {

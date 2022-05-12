@@ -50,4 +50,10 @@ __FORCEINLINE void load_scene(void* callbackFn, char bDevelopment)
         EV_FinishLoading();                       
 }
 
+/* Loads up the given AFS, provided by name, mounting it into the 'active AFS partition space' */
+__FORCEINLINE void LoadAfsPartition(char* szName) {
+    char* path = Filepath_Generator(SceneDirectory);
+    LOG("evl_AFS_Utils returned 0x%X\n", evl_AFS_Utils(0, MOUNT_AFS_PARTITION, path, (uint *)szName, 0));
+}
+
 #endif
