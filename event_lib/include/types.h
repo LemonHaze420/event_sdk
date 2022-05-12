@@ -79,6 +79,18 @@ struct astruct_192 {
     char field6_0x6;
 };
 
+typedef struct astruct_193 astruct_193, *Pastruct_193;
+
+struct astruct_193 {
+    undefined field0_0x0;
+    undefined field1_0x1;
+    undefined field2_0x2;
+    undefined field3_0x3;
+    undefined field4_0x4;
+    undefined field5_0x5;
+    undefined field6_0x6;
+};
+
 typedef struct astruct_105 astruct_105, *Pastruct_105;
 
 struct astruct_105 {

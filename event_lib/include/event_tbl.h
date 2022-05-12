@@ -956,12 +956,12 @@ __FORCEINLINE void FUN_0c0c67a0 () {
 		((void (*)())(void*)TBL_ADDR(IDX_FUN_0c0c67a0)) ();
 }
 
-__FORCEINLINE void FUN_0c171e80 (undefined * param_1) {
-		((void (*)(undefined *))(void*)TBL_ADDR(IDX_FUN_0c171e80)) (param_1);
+__FORCEINLINE void FUN_0c171e80 (astruct_193 * param_1) {
+		((void (*)(astruct_193 *))(void*)TBL_ADDR(IDX_FUN_0c171e80)) (param_1);
 }
 
-__FORCEINLINE void FUN_0c171e00 (astruct_192 * param_1) {
-		((void (*)(astruct_192 *))(void*)TBL_ADDR(IDX_FUN_0c171e00)) (param_1);
+__FORCEINLINE void FUN_0c171e00 (astruct_193 * param_1) {
+		((void (*)(astruct_193 *))(void*)TBL_ADDR(IDX_FUN_0c171e00)) (param_1);
 }
 
 __FORCEINLINE void FUN_0c0c6740 () {
