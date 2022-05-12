@@ -5,6 +5,7 @@
 indexes = ""
 functions = ""
 processedFuncs = []
+exclude_fns=["debug_log_to_file_REMOVED","debug_log_to_screen"]
 label = 'ShenmueScriptFunctions'
 array = currentProgram.symbolTable.getLabelOrFunctionSymbols(label, None)[0].object
 for i in xrange(array.numComponents):
@@ -18,6 +19,9 @@ for i in xrange(array.numComponents):
 		createFunction(value, None)
 	f = getFunctionAt(value)
 
+	# Setup our index for the function
+	indexes += '#define IDX_%s \t\t\t\t\t\t%d\n' % (f.getName(), i)
+
 	# only process uniques
 	already_processed = 0
 	for s in processedFuncs:
@@ -25,11 +29,14 @@ for i in xrange(array.numComponents):
 			already_processed = 1
 			print('Skipping %s' % f.getName())
 
+	# exclude any specific functions
+	for s in exclude_fns:
+		if s == f.getName():
+			already_processed = 1
+			print('Excluding %s' % f.getName())
+
 	if already_processed == 0:
 		processedFuncs.append(f.getName())
-
-		# Setup our index for the function
-		indexes += '#define IDX_%s \t\t\t\t\t\t%d\n' % (f.getName(), i)
 
 		# Collect parameter names
 		index = 0
