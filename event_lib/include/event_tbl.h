@@ -178,7 +178,7 @@
 #define IDX_FUN_0c0931c0 						170
 #define IDX_FUN_0c093220 						171
 #define IDX_EV_IsCharacterExist 						172
-#define IDX_FUN_0c0932c0 						173
+#define IDX_EV_UnknownFunc 						173
 #define IDX_FUN_0c093320 						174
 #define IDX_FUN_0c093360 						175
 #define IDX_FUN_0c0933c0 						176
@@ -225,7 +225,7 @@
 #define IDX_FUN_0c0eec20 						217
 #define IDX_FUN_0c0eec60 						218
 #define IDX_FUN_0c0f1480 						219
-#define IDX_FUN_0c0ef360 						220
+#define IDX_SetCEWPFlags 						220
 #define IDX_FUN_0c0ef460 						221
 #define IDX_FUN_0c0df4a0 						222
 #define IDX_FUN_0c0e0880 						223
@@ -960,8 +960,8 @@ __FORCEINLINE void FUN_0c171e80 (undefined * param_1) {
 		((void (*)(undefined *))(void*)TBL_ADDR(IDX_FUN_0c171e80)) (param_1);
 }
 
-__FORCEINLINE void FUN_0c171e00 (short * param_1) {
-		((void (*)(short *))(void*)TBL_ADDR(IDX_FUN_0c171e00)) (param_1);
+__FORCEINLINE void FUN_0c171e00 (astruct_192 * param_1) {
+		((void (*)(astruct_192 *))(void*)TBL_ADDR(IDX_FUN_0c171e00)) (param_1);
 }
 
 __FORCEINLINE void FUN_0c0c6740 () {
@@ -1244,8 +1244,8 @@ __FORCEINLINE void FUN_0c0c0f60 (undefined4 param_1, uint param_2) {
 		((void (*)(undefined4, uint))(void*)TBL_ADDR(IDX_FUN_0c0c0f60)) (param_1, param_2);
 }
 
-__FORCEINLINE void FUN_0c0c1120 (uint param_1, int param_2) {
-		((void (*)(uint, int))(void*)TBL_ADDR(IDX_FUN_0c0c1120)) (param_1, param_2);
+__FORCEINLINE void FUN_0c0c1120 (int param_1) {
+		((void (*)(int))(void*)TBL_ADDR(IDX_FUN_0c0c1120)) (param_1);
 }
 
 __FORCEINLINE void FUN_0c0c1cc0 (uint param_1, uint param_2) {
@@ -1316,8 +1316,8 @@ __FORCEINLINE void FUN_0c118000 () {
 		((void (*)())(void*)TBL_ADDR(IDX_FUN_0c118000)) ();
 }
 
-__FORCEINLINE void FUN_0c118220 (undefined8 param_1, undefined8 param_2, undefined8 param_3, undefined8 param_4) {
-		((void (*)(undefined8, undefined8, undefined8, undefined8))(void*)TBL_ADDR(IDX_FUN_0c118220)) (param_1, param_2, param_3, param_4);
+__FORCEINLINE void FUN_0c118220 () {
+		((void (*)())(void*)TBL_ADDR(IDX_FUN_0c118220)) ();
 }
 
 __FORCEINLINE void FUN_0c093a20 () {
@@ -1332,8 +1332,8 @@ __FORCEINLINE void FUN_0c117f20 (undefined4 param_1, undefined4 param_2, undefin
 		((void (*)(undefined4, undefined4, undefined4, undefined4, undefined4, undefined4, undefined4, undefined4, uint))(void*)TBL_ADDR(IDX_FUN_0c117f20)) (param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9);
 }
 
-__FORCEINLINE void FUN_0c1181c0 (undefined8 param_1, undefined8 param_2, undefined8 param_3, undefined8 param_4, int param_5) {
-		((void (*)(undefined8, undefined8, undefined8, undefined8, int))(void*)TBL_ADDR(IDX_FUN_0c1181c0)) (param_1, param_2, param_3, param_4, param_5);
+__FORCEINLINE void FUN_0c1181c0 (int param_1) {
+		((void (*)(int))(void*)TBL_ADDR(IDX_FUN_0c1181c0)) (param_1);
 }
 
 __FORCEINLINE void FUN_0c1597e0 () {
@@ -1532,12 +1532,12 @@ __FORCEINLINE bool EV_IsCharacterExist (undefined4 param_1) {
 		return ((bool (*)(undefined4))(void*)TBL_ADDR(IDX_EV_IsCharacterExist)) (param_1);
 }
 
-__FORCEINLINE void FUN_0c0932c0 (undefined4 param_1) {
-		((void (*)(undefined4))(void*)TBL_ADDR(IDX_FUN_0c0932c0)) (param_1);
+__FORCEINLINE undefined4 EV_UnknownFunc (undefined4 param_1) {
+		return ((undefined4 (*)(undefined4))(void*)TBL_ADDR(IDX_EV_UnknownFunc)) (param_1);
 }
 
-__FORCEINLINE void FUN_0c093320 () {
-		((void (*)())(void*)TBL_ADDR(IDX_FUN_0c093320)) ();
+__FORCEINLINE void FUN_0c093320 (undefined4 param_1) {
+		((void (*)(undefined4))(void*)TBL_ADDR(IDX_FUN_0c093320)) (param_1);
 }
 
 __FORCEINLINE void FUN_0c093360 () {
@@ -1636,8 +1636,8 @@ __FORCEINLINE undefined4 FUN_0c0f4740 (int param_1) {
 		return ((undefined4 (*)(int))(void*)TBL_ADDR(IDX_FUN_0c0f4740)) (param_1);
 }
 
-__FORCEINLINE int ReadMotiFromDirectory (int param_1, char * param_2) {
-		return ((int (*)(int, char *))(void*)TBL_ADDR(IDX_ReadMotiFromDirectory)) (param_1, param_2);
+__FORCEINLINE int ReadMotiFromDirectory (int param_1, int param_2, char * MOTI_File) {
+		return ((int (*)(int, int, char *))(void*)TBL_ADDR(IDX_ReadMotiFromDirectory)) (param_1, param_2, MOTI_File);
 }
 
 __FORCEINLINE undefined4 FUN_0c0e9320 (int param_1) {
@@ -1720,8 +1720,8 @@ __FORCEINLINE undefined4 FUN_0c0f1480 (int param_1, uint param_2) {
 		return ((undefined4 (*)(int, uint))(void*)TBL_ADDR(IDX_FUN_0c0f1480)) (param_1, param_2);
 }
 
-__FORCEINLINE uint FUN_0c0ef360 (int param_1, uint param_2, int param_3) {
-		return ((uint (*)(int, uint, int))(void*)TBL_ADDR(IDX_FUN_0c0ef360)) (param_1, param_2, param_3);
+__FORCEINLINE uint SetCEWPFlags (int param_1, uint param_2, int param_3) {
+		return ((uint (*)(int, uint, int))(void*)TBL_ADDR(IDX_SetCEWPFlags)) (param_1, param_2, param_3);
 }
 
 __FORCEINLINE uint FUN_0c0ef460 (int param_1, uint param_2, int param_3, int param_4) {

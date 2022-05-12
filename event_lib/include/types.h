@@ -67,6 +67,17 @@ typedef enum FilepathGenMode {
     PackDirectory=7
 } FilepathGenMode;
 
+typedef struct astruct_192 astruct_192, *Pastruct_192;
+
+struct astruct_192 {
+    undefined field0_0x0;
+    char field1_0x1;
+    char field2_0x2;
+    undefined field3_0x3;
+    char field4_0x4;
+    char field5_0x5;
+    char field6_0x6;
+};
 
 typedef struct astruct_105 astruct_105, *Pastruct_105;
 
