@@ -56,4 +56,12 @@ __FORCEINLINE void LoadAfsPartition(char* szName) {
     LOG("evl_AFS_Utils returned 0x%X\n", evl_AFS_Utils(0, MOUNT_AFS_PARTITION, path, (uint *)szName, 0));
 }
 
+/* Returns the task parameter pointer for the map control task. 
+   NOTE: Only supports GameJam version as of now.
+*/
+__FORCEINLINE void* GetMapControlTaskParameterPointer() {
+        unsigned int MapControlTask = *(int*)(0x0c2d4e54);
+        return GetTaskParameterPointer(&MapControlTask);
+}
+
 #endif

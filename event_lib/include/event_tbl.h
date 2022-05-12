@@ -351,7 +351,7 @@
 #define IDX_FUN_0c093920 						348
 #define IDX_FUN_0c095e20 						349
 #define IDX_SetPlayerCashOrMoney 						350
-#define IDX_FUN_0c04c670 						351
+#define IDX_fsca_wrapper3 						351
 #define IDX_FUN_0c04c678 						352
 #define IDX_FUN_0c04c698 						353
 #define IDX_FUN_0c0942c0 						354
@@ -616,7 +616,6 @@
 #define IDX_FUN_0c1d6990 						615
 #define IDX_FUN_0c1dde40 						616
 #define IDX_FUN_0c1d6eb0 						617
-#define IDX_fsca_wrapper3 						618
 #define IDX_fsca_wrapper2 						619
 #define IDX_FUN_0c1de240 						620
 #define IDX_FUN_0c15bfc0 						621
@@ -1533,8 +1532,8 @@ __FORCEINLINE bool EV_IsCharacterExist (undefined4 param_1) {
 		return ((bool (*)(undefined4))(void*)TBL_ADDR(IDX_EV_IsCharacterExist)) (param_1);
 }
 
-__FORCEINLINE void FUN_0c0932c0 (undefined param_1) {
-		((void (*)(undefined))(void*)TBL_ADDR(IDX_FUN_0c0932c0)) (param_1);
+__FORCEINLINE void FUN_0c0932c0 (undefined4 param_1) {
+		((void (*)(undefined4))(void*)TBL_ADDR(IDX_FUN_0c0932c0)) (param_1);
 }
 
 __FORCEINLINE void FUN_0c093320 () {
@@ -1609,8 +1608,8 @@ __FORCEINLINE void FUN_0c190aa0 () {
 		((void (*)())(void*)TBL_ADDR(IDX_FUN_0c190aa0)) ();
 }
 
-__FORCEINLINE void EV_DispUpHandModel () {
-		((void (*)())(void*)TBL_ADDR(IDX_EV_DispUpHandModel)) ();
+__FORCEINLINE undefined4 EV_DispUpHandModel () {
+		return ((undefined4 (*)())(void*)TBL_ADDR(IDX_EV_DispUpHandModel)) ();
 }
 
 __FORCEINLINE void FUN_0c091ac0 () {
@@ -2177,8 +2176,8 @@ __FORCEINLINE void FUN_0c0936e0 (int param_1, uint param_2, int * param_3) {
 		((void (*)(int, uint, int *))(void*)TBL_ADDR(IDX_FUN_0c0936e0)) (param_1, param_2, param_3);
 }
 
-__FORCEINLINE undefined4 LoadHandsMaybe (int param_1) {
-		return ((undefined4 (*)(int))(void*)TBL_ADDR(IDX_LoadHandsMaybe)) (param_1);
+__FORCEINLINE undefined4 LoadHandsMaybe (undefined4 param_1) {
+		return ((undefined4 (*)(undefined4))(void*)TBL_ADDR(IDX_LoadHandsMaybe)) (param_1);
 }
 
 __FORCEINLINE void FUN_0c1415a0 (undefined4 param_1) {
@@ -2225,8 +2224,8 @@ __FORCEINLINE void SetPlayerCashOrMoney (int value, int nMode) {
 		((void (*)(int, int))(void*)TBL_ADDR(IDX_SetPlayerCashOrMoney)) (value, nMode);
 }
 
-__FORCEINLINE void FUN_0c04c670 (undefined4 param_1, int param_2, uint param_3) {
-		((void (*)(undefined4, int, uint))(void*)TBL_ADDR(IDX_FUN_0c04c670)) (param_1, param_2, param_3);
+__FORCEINLINE void fsca_wrapper3 (undefined4 param_1, int param_2, uint param_3) {
+		((void (*)(undefined4, int, uint))(void*)TBL_ADDR(IDX_fsca_wrapper3)) (param_1, param_2, param_3);
 }
 
 __FORCEINLINE void FUN_0c04c678 (undefined4 param_1, uint param_2) {
@@ -3283,10 +3282,6 @@ __FORCEINLINE void FUN_0c1dde40 (undefined4 param_1, undefined4 param_2, double 
 
 __FORCEINLINE float FUN_0c1d6eb0 (ulonglong param_1, uint param_2) {
 		return ((float (*)(ulonglong, uint))(void*)TBL_ADDR(IDX_FUN_0c1d6eb0)) (param_1, param_2);
-}
-
-__FORCEINLINE ulonglong fsca_wrapper3 (float param_1, float param_2, uint param_3) {
-		return ((ulonglong (*)(float, float, uint))(void*)TBL_ADDR(IDX_fsca_wrapper3)) (param_1, param_2, param_3);
 }
 
 __FORCEINLINE void fsca_wrapper2 (uint param_1) {
