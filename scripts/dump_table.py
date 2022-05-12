@@ -19,9 +19,6 @@ for i in xrange(array.numComponents):
 		createFunction(value, None)
 	f = getFunctionAt(value)
 
-	# Setup our index for the function
-	indexes += '#define IDX_%s \t\t\t\t\t\t%d\n' % (f.getName(), i)
-
 	# only process uniques
 	already_processed = 0
 	for s in processedFuncs:
@@ -37,6 +34,9 @@ for i in xrange(array.numComponents):
 
 	if already_processed == 0:
 		processedFuncs.append(f.getName())
+
+		# Setup our index for the function
+		indexes += '#define IDX_%s \t\t\t\t\t\t%d\n' % (f.getName(), i)		
 
 		# Collect parameter names
 		index = 0
