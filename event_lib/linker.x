@@ -6,8 +6,16 @@ SECTIONS
         *(.text.main);
         *(.text*);
     }
+    .rodata :
+    {
+        *(.rodata*);
+    }    
     .data :
     {
         *(.data*);
     }
+    .bss :
+    {
+        *(.bss*);
+    }    
 }
