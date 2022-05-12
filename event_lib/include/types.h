@@ -3030,10 +3030,60 @@ struct astruct_96 {
     uint field16_0x10;
 };
 
+typedef struct HLib_Task_t HLib_Task_t, *PHLib_Task_t;
+
+struct HLib_Task_t {
+    undefined * taskCallback;
+    undefined field1_0x4;
+    undefined field2_0x5;
+    undefined field3_0x6;
+    undefined field4_0x7;
+    undefined field5_0x8;
+    undefined field6_0x9;
+    undefined field7_0xa;
+    undefined field8_0xb;
+    int chara_type;
+    undefined field10_0x10;
+    undefined field11_0x11;
+    undefined field12_0x12;
+    undefined field13_0x13;
+    undefined field14_0x14;
+    undefined field15_0x15;
+    undefined field16_0x16;
+    undefined field17_0x17;
+    undefined1 next_task; // Created by retype action
+    undefined field19_0x19;
+    undefined field20_0x1a;
+    undefined field21_0x1b;
+    undefined field22_0x1c;
+    undefined field23_0x1d;
+    undefined field24_0x1e;
+    undefined field25_0x1f;
+    undefined field26_0x20;
+    undefined field27_0x21;
+    undefined field28_0x22;
+    undefined field29_0x23;
+    undefined1 other_task; // Created by retype action
+    undefined field31_0x25;
+    undefined field32_0x26;
+    undefined field33_0x27;
+    undefined field34_0x28;
+    undefined field35_0x29;
+    undefined field36_0x2a;
+    undefined field37_0x2b;
+    undefined field38_0x2c;
+    undefined field39_0x2d;
+    undefined field40_0x2e;
+    undefined field41_0x2f;
+    undefined * field42_0x30;
+    undefined * field43_0x34;
+    undefined4 field44_0x38;
+};
+
 typedef struct astruct_86 astruct_86, *Pastruct_86;
 
 struct astruct_86 {
-    undefined4 * pTASK;
+    HLib_Task_t * pTASK;
     int MOTI_memblock;
     undefined2 scene_num;
     undefined2 cur_state;
@@ -6427,56 +6477,6 @@ struct astruct_175 {
 };
 
 typedef struct astruct_124 astruct_124, *Pastruct_124;
-
-typedef struct HLib_Task_t HLib_Task_t, *PHLib_Task_t;
-
-struct HLib_Task_t {
-    undefined * taskCallback;
-    undefined field1_0x4;
-    undefined field2_0x5;
-    undefined field3_0x6;
-    undefined field4_0x7;
-    undefined field5_0x8;
-    undefined field6_0x9;
-    undefined field7_0xa;
-    undefined field8_0xb;
-    int chara_type;
-    undefined field10_0x10;
-    undefined field11_0x11;
-    undefined field12_0x12;
-    undefined field13_0x13;
-    undefined field14_0x14;
-    undefined field15_0x15;
-    undefined field16_0x16;
-    undefined field17_0x17;
-    undefined1 next_task; // Created by retype action
-    undefined field19_0x19;
-    undefined field20_0x1a;
-    undefined field21_0x1b;
-    undefined field22_0x1c;
-    undefined field23_0x1d;
-    undefined field24_0x1e;
-    undefined field25_0x1f;
-    undefined field26_0x20;
-    undefined field27_0x21;
-    undefined field28_0x22;
-    undefined field29_0x23;
-    undefined1 other_task; // Created by retype action
-    undefined field31_0x25;
-    undefined field32_0x26;
-    undefined field33_0x27;
-    undefined field34_0x28;
-    undefined field35_0x29;
-    undefined field36_0x2a;
-    undefined field37_0x2b;
-    undefined field38_0x2c;
-    undefined field39_0x2d;
-    undefined field40_0x2e;
-    undefined field41_0x2f;
-    undefined * field42_0x30;
-    undefined * field43_0x34;
-    undefined4 field44_0x38;
-};
 
 struct astruct_124 {
     int field0_0x0;

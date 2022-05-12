@@ -885,20 +885,20 @@ __FORCEINLINE bool FUN_0c0ffe80 (int param_1) {
 		return ((bool (*)(int))(void*)TBL_ADDR(IDX_FUN_0c0ffe80)) (param_1);
 }
 
-__FORCEINLINE undefined4 FUN_0c100100 (undefined4 param_1, undefined4 param_2, undefined4 param_3, undefined4 param_4, undefined4 param_5, undefined4 param_6, undefined4 param_7, undefined4 param_8, int param_9) {
-		return ((undefined4 (*)(undefined4, undefined4, undefined4, undefined4, undefined4, undefined4, undefined4, undefined4, int))(void*)TBL_ADDR(IDX_FUN_0c100100)) (param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9);
+__FORCEINLINE undefined4 FUN_0c100100 (int param_1) {
+		return ((undefined4 (*)(int))(void*)TBL_ADDR(IDX_FUN_0c100100)) (param_1);
 }
 
 __FORCEINLINE undefined4 FUN_0c1001a0 (int param_1) {
 		return ((undefined4 (*)(int))(void*)TBL_ADDR(IDX_FUN_0c1001a0)) (param_1);
 }
 
-__FORCEINLINE undefined4 FUN_0c1005e0 (undefined4 param_1, undefined4 param_2, undefined4 param_3, undefined4 param_4, uint param_5, undefined4 param_6, undefined4 param_7, undefined4 param_8, int param_9) {
-		return ((undefined4 (*)(undefined4, undefined4, undefined4, undefined4, uint, undefined4, undefined4, undefined4, int))(void*)TBL_ADDR(IDX_FUN_0c1005e0)) (param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9);
+__FORCEINLINE undefined4 FUN_0c1005e0 (int param_1) {
+		return ((undefined4 (*)(int))(void*)TBL_ADDR(IDX_FUN_0c1005e0)) (param_1);
 }
 
-__FORCEINLINE undefined4 FUN_0c1007e0 (undefined4 param_1, undefined4 param_2, undefined8 param_3, undefined8 param_4, undefined8 param_5, int param_6) {
-		return ((undefined4 (*)(undefined4, undefined4, undefined8, undefined8, undefined8, int))(void*)TBL_ADDR(IDX_FUN_0c1007e0)) (param_1, param_2, param_3, param_4, param_5, param_6);
+__FORCEINLINE undefined4 FUN_0c1007e0 (int param_1) {
+		return ((undefined4 (*)(int))(void*)TBL_ADDR(IDX_FUN_0c1007e0)) (param_1);
 }
 
 __FORCEINLINE void FUN_0c0d9e00 (short param_1, ushort param_2, short param_3) {
@@ -1529,12 +1529,12 @@ __FORCEINLINE undefined4 FUN_0c093220 () {
 		return ((undefined4 (*)())(void*)TBL_ADDR(IDX_FUN_0c093220)) ();
 }
 
-__FORCEINLINE bool EV_IsCharacterExist () {
-		return ((bool (*)())(void*)TBL_ADDR(IDX_EV_IsCharacterExist)) ();
+__FORCEINLINE bool EV_IsCharacterExist (undefined4 param_1) {
+		return ((bool (*)(undefined4))(void*)TBL_ADDR(IDX_EV_IsCharacterExist)) (param_1);
 }
 
-__FORCEINLINE void FUN_0c0932c0 () {
-		((void (*)())(void*)TBL_ADDR(IDX_FUN_0c0932c0)) ();
+__FORCEINLINE void FUN_0c0932c0 (undefined param_1) {
+		((void (*)(undefined))(void*)TBL_ADDR(IDX_FUN_0c0932c0)) (param_1);
 }
 
 __FORCEINLINE void FUN_0c093320 () {
@@ -1637,8 +1637,8 @@ __FORCEINLINE undefined4 FUN_0c0f4740 (int param_1) {
 		return ((undefined4 (*)(int))(void*)TBL_ADDR(IDX_FUN_0c0f4740)) (param_1);
 }
 
-__FORCEINLINE void ReadMotiFromDirectory (int param_1, char * param_2) {
-		((void (*)(int, char *))(void*)TBL_ADDR(IDX_ReadMotiFromDirectory)) (param_1, param_2);
+__FORCEINLINE int ReadMotiFromDirectory (int param_1, char * param_2) {
+		return ((int (*)(int, char *))(void*)TBL_ADDR(IDX_ReadMotiFromDirectory)) (param_1, param_2);
 }
 
 __FORCEINLINE undefined4 FUN_0c0e9320 (int param_1) {
@@ -1977,8 +1977,8 @@ __FORCEINLINE void * GetTaskParameterPointer (void * param_1) {
 		return ((void * (*)(void *))(void*)TBL_ADDR(IDX_GetTaskParameterPointer)) (param_1);
 }
 
-__FORCEINLINE undefined4 FUN_0c0540e0 (int * param_1) {
-		return ((undefined4 (*)(int *))(void*)TBL_ADDR(IDX_FUN_0c0540e0)) (param_1);
+__FORCEINLINE undefined4 FUN_0c0540e0 (HLib_Task_t * param_1) {
+		return ((undefined4 (*)(HLib_Task_t *))(void*)TBL_ADDR(IDX_FUN_0c0540e0)) (param_1);
 }
 
 __FORCEINLINE void SetDestroyCallbackOnCurrentTask_Wrapper (undefined4 param_1) {
@@ -2001,8 +2001,8 @@ __FORCEINLINE void FUN_0c055160 () {
 		((void (*)())(void*)TBL_ADDR(IDX_FUN_0c055160)) ();
 }
 
-__FORCEINLINE void SetTaskDestroyCallback (astruct_166 * TASK, undefined * param_2) {
-		((void (*)(astruct_166 *, undefined *))(void*)TBL_ADDR(IDX_SetTaskDestroyCallback)) (TASK, param_2);
+__FORCEINLINE void SetTaskDestroyCallback (HLib_Task_t * TASK, undefined * param_2) {
+		((void (*)(HLib_Task_t *, undefined *))(void*)TBL_ADDR(IDX_SetTaskDestroyCallback)) (TASK, param_2);
 }
 
 __FORCEINLINE void FUN_0c054880 (undefined4 * param_1) {
@@ -2013,8 +2013,8 @@ __FORCEINLINE void FUN_0c054200 () {
 		((void (*)())(void*)TBL_ADDR(IDX_FUN_0c054200)) ();
 }
 
-__FORCEINLINE void FUN_0c054220 (int * param_1) {
-		((void (*)(int *))(void*)TBL_ADDR(IDX_FUN_0c054220)) (param_1);
+__FORCEINLINE void FUN_0c054220 (HLib_Task_t * param_1) {
+		((void (*)(HLib_Task_t *))(void*)TBL_ADDR(IDX_FUN_0c054220)) (param_1);
 }
 
 __FORCEINLINE astruct_15 * get_task_queue () {
@@ -2177,8 +2177,8 @@ __FORCEINLINE void FUN_0c0936e0 (int param_1, uint param_2, int * param_3) {
 		((void (*)(int, uint, int *))(void*)TBL_ADDR(IDX_FUN_0c0936e0)) (param_1, param_2, param_3);
 }
 
-__FORCEINLINE undefined4 LoadHandsMaybe (undefined4 param_1, uint param_2, ulonglong param_3, int param_4) {
-		return ((undefined4 (*)(undefined4, uint, ulonglong, int))(void*)TBL_ADDR(IDX_LoadHandsMaybe)) (param_1, param_2, param_3, param_4);
+__FORCEINLINE undefined4 LoadHandsMaybe (int param_1) {
+		return ((undefined4 (*)(int))(void*)TBL_ADDR(IDX_LoadHandsMaybe)) (param_1);
 }
 
 __FORCEINLINE void FUN_0c1415a0 (undefined4 param_1) {
@@ -2817,8 +2817,8 @@ __FORCEINLINE void FUN_0c117bc0 (int param_1, int param_2) {
 		((void (*)(int, int))(void*)TBL_ADDR(IDX_FUN_0c117bc0)) (param_1, param_2);
 }
 
-__FORCEINLINE void FUN_0c1afdc0 (undefined4 param_1, double param_2, undefined4 param_3, int param_4, uint param_5) {
-		((void (*)(undefined4, double, undefined4, int, uint))(void*)TBL_ADDR(IDX_FUN_0c1afdc0)) (param_1, param_2, param_3, param_4, param_5);
+__FORCEINLINE void FUN_0c1afdc0 (undefined4 param_1, int param_2, uint param_3) {
+		((void (*)(undefined4, int, uint))(void*)TBL_ADDR(IDX_FUN_0c1afdc0)) (param_1, param_2, param_3);
 }
 
 __FORCEINLINE void FUN_0c095da0 (int param_1, undefined4 param_2) {
