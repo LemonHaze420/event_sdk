@@ -3,16 +3,16 @@ TARGET=simple_example.$(TYPE)
 
 all: rm-elf $(TARGET)
 
-simple_example.elf: main.c
+$(TARGET).elf: main.c
 	$(CC) $(CFLAGS) -o $@ main.c 
 
-simple_example.$(TYPE): simple_example.elf
+$(TARGET): $(TARGET).elf
 	$(OBJCOPY) $^ $@
 
 .PHONY : clean
 clean:
-	-rm -f $(TARGET) simple_example.$(TYPE) simple_example.elf $(OBJS)
+	-rm -f $(TARGET) $(TARGET) $(TARGET).elf $(OBJS)
 
 .PHONY : rm-elf
 rm-elf:
-	-rm -f $(TARGET) simple_example.elf
+	-rm -f $(TARGET) $(TARGET).elf

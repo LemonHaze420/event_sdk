@@ -1,18 +1,19 @@
 include ../event_lib/Makefile
-TARGET=cutscene_viewer.$(TYPE)
+TARGET=0517.$(TYPE)
+#CC=sh4-elf-g++
 
 all: rm-elf $(TARGET)
 
-cutscene_viewer.elf: main.c
+$(TARGET).elf: main.c
 	$(CC) $(CFLAGS) -o $@ main.c 
 
-cutscene_viewer.$(TYPE): cutscene_viewer.elf
+$(TARGET): $(TARGET).elf
 	$(OBJCOPY) $^ $@
 
 .PHONY : clean
 clean:
-	-rm -f $(TARGET) cutscene_viewer.$(TYPE) cutscene_viewer.elf $(OBJS)
+	-rm -f $(TARGET) $(TARGET) $(TARGET).elf $(OBJS)
 
 .PHONY : rm-elf
 rm-elf:
-	-rm -f $(TARGET) cutscene_viewer.elf
+	-rm -f $(TARGET) $(TARGET).elf

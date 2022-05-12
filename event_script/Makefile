@@ -1,17 +1,18 @@
 include ../event_lib/Makefile
+TARGET=bicycle_creator.$(TYPE)
 
 all: rm-elf $(TARGET)
 
-event.elf: main.c
+$(TARGET).elf: main.c
 	$(CC) $(CFLAGS) -o $@ main.c 
 
-event.$(TYPE): event.elf
+$(TARGET): $(TARGET).elf
 	$(OBJCOPY) $^ $@
 
 .PHONY : clean
 clean:
-	-rm -f $(TARGET) event.$(TYPE) event.elf $(OBJS)
+	-rm -f $(TARGET) $(TARGET) $(TARGET).elf $(OBJS)
 
 .PHONY : rm-elf
 rm-elf:
-	-rm -f $(TARGET) event.elf
+	-rm -f $(TARGET) $(TARGET).elf
