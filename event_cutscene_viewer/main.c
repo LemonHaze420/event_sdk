@@ -222,17 +222,6 @@ void FUN_0517_runtime__LOAD_Callback(void)
 {
         return;
 }
-void EnqueueLoad(undefined4 param_1, HLib_Task_t* TASK)
-{
-        EV_NPC_NewLoadSw(1);
-        FUN_0c1003a0();
-        if (TASK != (HLib_Task_t *)0x0) {
-                // SetTaskDestroyCallback(TASK, (undefined *)0x0);
-        }
-        // EnqueueTaskWithoutParameter(FUN_0517_runtime__LOAD_Callback, 0x06,0xb,0x64616f6c);
-        return;
-}
-
 static void ToggleUI()
 {
         char curr_val = *(char*)(0x0C303D94);        
@@ -247,9 +236,6 @@ static void ToggleUI()
 
 void _entry start(void)
 {
-        LOG("==== entrypoint started \n");
-        sleep(2);
-                
         HLib_Task_t* EVNT = EnqueueTaskWithParameter(DebugSelector_EVNT_Callback, 0x04, 0xb, 0xc, 0x544e5645);
         astruct_86 * EVNT_params = (astruct_86 *)GetTaskParameterPointer(EVNT);
         EVNT_params->pTASK = &EVNT->taskCallback;
@@ -266,6 +252,8 @@ void _entry start(void)
         EV_NPC_NewLoadSw(1);
         FUN_0c1003a0();
         
-        LOG("==== entrypoint finished \n");
-        sleep(2);
+        //if (TASK != (HLib_Task_t *)0x0) {
+                // SetTaskDestroyCallback(TASK, (undefined *)0x0);
+        //}
+        // EnqueueTaskWithoutParameter(FUN_0517_runtime__LOAD_Callback, 0x06,0xb,0x64616f6c);
 }
