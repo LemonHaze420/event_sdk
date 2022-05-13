@@ -10,7 +10,23 @@
 #define MIN_CUTSCENE_ID         0
 #define MAX_CUTSCENE_ID         4
 
-static void entrypoint(void);
+#define MAP1_NAME               "KWW1"
+#define MAP2_NAME               "KWA1"
+#define MAP3_NAME               "KWA2"
+
+#define MOT_NAME                "0517A.MOT"
+#define SEQ_NAME                "0517"
+#define W_COND_N                "W_COND.BIN"
+
+__FORCEINLINE unsigned int GetCurrentScene() {
+        return *(int*)(0x0c020164);
+}
+
+__FORCEINLINE unsigned int GetCurrentArea() {
+        return *(int*)(0x0c020168);
+}
+
+static void init_cutscene_viewer(void);
 
 static void MainStateHandler(astruct_86 *evt_ctx);
 static void CutscenePlayStateHandler(astruct_86 *evt_ctx);
@@ -31,6 +47,18 @@ static void EnqueueLoad(undefined4 param_1, astruct_166 *param_2);
 static void LOAD_Callback(void);
 
 static astruct_193 unk_struct;
+
+static void debug_task_callback(void)
+{
+        return;
+}
+
+void _entry start()
+{
+        load_scene(debug_task_callback, 1);
+        init_cutscene_viewer();
+        return;
+}
 
 static void SetCEWP_MTWK_FlagTo0(int charaID)
 {
@@ -109,21 +137,21 @@ static void InitCutscene(int scene_num)
 	int sceneID;
   
 	FUN_0c171e80(&unk_struct);
-	unk_struct.field5_0x5 = '\0';
+	unk_struct.field5_0x5 = 0x0;
   
-	undefined4 *tmp_AFS = evl_AFS_Utils(0,IsLoaded,"KWW1",(uint *)0x0,0);
+	undefined4 *tmp_AFS = evl_AFS_Utils(0, IsLoaded, MAP1_NAME, (uint *)0x0,0);
 	if (tmp_AFS != (undefined4 *)0x0) {
-		evl_AFS_Utils(0,IsLoaded_6,"KWW1",(uint *)0x0,0);
+		evl_AFS_Utils(0, IsLoaded_6, MAP1_NAME, (uint *)0x0,0);
 	}
         
-	tmp_AFS = evl_AFS_Utils(0,IsLoaded,"KWA1",(uint *)0x0,0);
+	tmp_AFS = evl_AFS_Utils(0,IsLoaded, MAP2_NAME, (uint *)0x0,0);
 	if (tmp_AFS != (undefined4 *)0x0) {
-		evl_AFS_Utils(0,IsLoaded_6,"KWA1",(uint *)0x0,0);
+		evl_AFS_Utils(0, IsLoaded_6, MAP2_NAME, (uint *)0x0,0);
 	}
         
-	tmp_AFS = evl_AFS_Utils(0,IsLoaded,"KWA2",(uint *)0x0,0);
+	tmp_AFS = evl_AFS_Utils(0,IsLoaded, MAP3_NAME, (uint *)0x0,0);
 	if (tmp_AFS != (undefined4 *)0x0) {
-		evl_AFS_Utils(0,IsLoaded_6,"KWA2",(uint *)0x0,0);
+		evl_AFS_Utils(0, IsLoaded_6, MAP3_NAME, (uint *)0x0,0);
 	}
 
 	char *sceneDirectory;
@@ -131,9 +159,9 @@ static void InitCutscene(int scene_num)
 		unk_struct.field4_0x4 = '\b';
     
 		sceneDirectory = Filepath_Generator(SceneDirectory);
-		evl_AFS_Utils(0,MOUNT_AFS_PARTITION,sceneDirectory,(uint *)"KWW1",0);
-		evl_AFS_Utils(0,NewLoadPAK,(char *)0x0,(uint *)0x0,0);
-		cutsceneID = "KWW1";
+		evl_AFS_Utils(0, MOUNT_AFS_PARTITION, sceneDirectory, (uint *)MAP1_NAME,0);
+		evl_AFS_Utils(0, NewLoadPAK, (char *)0x0, (uint *)0x0,0);
+		cutsceneID = MAP1_NAME;
 		sceneID = scene_num;
 	}
 	else {
@@ -141,13 +169,13 @@ static void InitCutscene(int scene_num)
 			unk_struct.field4_0x4 = '\x12';
       
 			sceneDirectory = Filepath_Generator(SceneDirectory);
-			cutsceneID = "KWA2";
+			cutsceneID = MAP3_NAME;
 		}
 		else {
 			unk_struct.field4_0x4 = '\x12';
       
 			sceneDirectory = Filepath_Generator(SceneDirectory);
-			cutsceneID = "KWA1";
+			cutsceneID = MAP2_NAME;
 		}
                 
 		evl_AFS_Utils(0, MOUNT_AFS_PARTITION, sceneDirectory, (uint *)cutsceneID, 0);
@@ -197,6 +225,7 @@ static void CutscenePlayStateHandler(astruct_86 *evt_ctx)
                 //EnqueueTaskWithoutParameter (FUN_0517_runtime__0c348760_fsca_wrapper3,'\x04',0xb,0x544e5645);
 	}
 	FUN_0c1b0ce0();
+        // ?????? always does it anyway ???
 	if (evt_ctx->scene_num == 4) {
 		FUN_0c1afdc0(1,0,0);
 	}
@@ -207,7 +236,7 @@ static void CutscenePlayStateHandler(astruct_86 *evt_ctx)
 	FUN_0c093d20();
 	SetCEWP_MTWK_FlagTo2_Wrapper();
 	FUN_0c1542c0((int)(short)evt_ctx->scene_num);
-	evt_ctx->cur_state = 2;
+	evt_ctx->cur_state = UNK_STATE;
 	return;
 }
 
@@ -275,13 +304,14 @@ static void MainStateHandler(astruct_86 *evt_ctx)
         }
         return;
 }
+
 void LoadWCONDBin(void)
 {
         EV_SetPlayerControlFlags(0);
-        FUN_0c1a93c0(1, (uint *)"0517");
+        FUN_0c1a93c0(1, (uint *)SEQ_NAME);
         
         char* path = Filepath_Generator(SceneDirectory);
-        LoadFile_Wrapper(path, "W_COND.BIN");
+        LoadFile_Wrapper(path, W_COND_N);
         return;
 }
 
@@ -297,16 +327,13 @@ static void ToggleUI()
         }
 }
 
-void _entry start(void)
+void init_cutscene_viewer(void)
 {
         HLib_Task_t* EVNT = EnqueueTaskWithParameter(MainStateHandler, 0x04, 0xb, 0xc, FOURCC('E','V','N','T'));
         astruct_86 * EVNT_params = (astruct_86 *)GetTaskParameterPointer(EVNT);
         EVNT_params->pTASK = EVNT;
         
-        unsigned int scene = *(int*)(0x0c020164);
-        unsigned int area  = *(int*)(0x0c020168);
-        
-        int MOTI = ReadMotiFromDirectory(scene, area, "0517A.MOT");  
+        int MOTI = ReadMotiFromDirectory(GetCurrentScene(), GetCurrentArea(), MOT_NAME);  
         EVNT_params->MOTI_memblock = MOTI;
         EVNT_params->scene_num = 0;
         EVNT_params->cur_state = 0;
@@ -320,5 +347,5 @@ void _entry start(void)
         //if (TASK != (HLib_Task_t *)0x0) {
                 // SetTaskDestroyCallback(TASK, (undefined *)0x0);
         //}
-        // EnqueueTaskWithoutParameter(LOAD_Callback, 0x06,0xb,0x64616f6c);
+        // EnqueueTaskWithoutParameter(LOAD_Callback, 0x06,0xb, FOURCC('l','o','a','d'));
 }
