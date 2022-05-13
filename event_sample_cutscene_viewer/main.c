@@ -6,7 +6,7 @@
 */
 #include "common.h"
 #include "cutscene_viewer.h"
- 
+
 #define MIN_CUTSCENE_ID         0
 #define MAX_CUTSCENE_ID         4
 
@@ -35,7 +35,7 @@ static astruct_193 unk_struct;
 static void SetCEWP_MTWK_FlagTo0(int charaID)
 {
 	astruct_51 * paVar1 = FindMTWK_ForCEWP(charaID);
-	SetCEWPFlags((int)paVar1,6,0);
+	SetCEWPFlags((int)paVar1, 6, 0);
 	EV_UnknownFunc(charaID);
 	return;
 }
@@ -43,38 +43,40 @@ static void SetCEWP_MTWK_FlagTo0(int charaID)
 static void SetCEWP_MTWK_FlagTo2(int charaID)
 {
 	astruct_51 *paVar1 = FindMTWK_ForCEWP(charaID);
-	SetCEWPFlags((int)paVar1,6,2);
+	SetCEWPFlags((int)paVar1, 6, 2);
 	EV_UnknownFunc(charaID);
 	return;
 }
 
 static void SetCEWP_MTWK_FlagTo0_Wrapper(void)
 {
-	SetCEWP_MTWK_FlagTo0(0x5f4f5952);
-	SetCEWP_MTWK_FlagTo0(0x5f4e4953);
-	EV_UnknownFunc(0x38383961);
-	EV_UnknownFunc(0x30393961);
-	EV_UnknownFunc(0x32393961);
-	EV_UnknownFunc(0x34393961);
-	EV_UnknownFunc(0x30343861);
-	EV_UnknownFunc(0x32343861);
-	EV_UnknownFunc(0x34343861);
-	EV_UnknownFunc(0x38343861);
+	SetCEWP_MTWK_FlagTo0(FOURCC('R', 'Y', 'O', '_'));
+	SetCEWP_MTWK_FlagTo0(FOURCC('S', 'I', 'N', '_'));
+        
+	EV_UnknownFunc(FOURCC('a','9','8','8'));
+	EV_UnknownFunc(FOURCC('a','9','9','0'));
+	EV_UnknownFunc(FOURCC('a','9','9','2'));
+	EV_UnknownFunc(FOURCC('a','9','9','4'));
+	EV_UnknownFunc(FOURCC('a','8','4','0'));
+	EV_UnknownFunc(FOURCC('a','8','4','2'));
+	EV_UnknownFunc(FOURCC('a','8','4','4'));
+	EV_UnknownFunc(FOURCC('a','8','4','8'));
 	return;
 }
 
 static void SetCEWP_MTWK_FlagTo2_Wrapper(void)
 {
-	SetCEWP_MTWK_FlagTo2(0x5f4f5952);
-	SetCEWP_MTWK_FlagTo2(0x5f4e4953);
-	EV_UnknownFunc(0x38383961);
-	EV_UnknownFunc(0x30393961);
-	EV_UnknownFunc(0x32393961);
-	EV_UnknownFunc(0x34393961);
-	EV_UnknownFunc(0x30343861);
-	EV_UnknownFunc(0x32343861);
-	EV_UnknownFunc(0x34343861);
-	EV_UnknownFunc(0x38343861);
+	SetCEWP_MTWK_FlagTo2(FOURCC('R', 'Y', 'O', '_'));
+	SetCEWP_MTWK_FlagTo2(FOURCC('S', 'I', 'N', '_'));
+        
+	EV_UnknownFunc(FOURCC('a','9','8','8'));
+	EV_UnknownFunc(FOURCC('a','9','9','0'));
+	EV_UnknownFunc(FOURCC('a','9','9','2'));
+	EV_UnknownFunc(FOURCC('a','9','9','4'));
+	EV_UnknownFunc(FOURCC('a','8','4','0'));
+	EV_UnknownFunc(FOURCC('a','8','4','2'));
+	EV_UnknownFunc(FOURCC('a','8','4','4'));
+	EV_UnknownFunc(FOURCC('a','8','4','8'));
 	return;
 }
 
@@ -113,10 +115,12 @@ static void InitCutscene(int scene_num)
 	if (tmp_AFS != (undefined4 *)0x0) {
 		evl_AFS_Utils(0,IsLoaded_6,"KWW1",(uint *)0x0,0);
 	}
+        
 	tmp_AFS = evl_AFS_Utils(0,IsLoaded,"KWA1",(uint *)0x0,0);
 	if (tmp_AFS != (undefined4 *)0x0) {
 		evl_AFS_Utils(0,IsLoaded_6,"KWA1",(uint *)0x0,0);
 	}
+        
 	tmp_AFS = evl_AFS_Utils(0,IsLoaded,"KWA2",(uint *)0x0,0);
 	if (tmp_AFS != (undefined4 *)0x0) {
 		evl_AFS_Utils(0,IsLoaded_6,"KWA2",(uint *)0x0,0);
@@ -145,8 +149,11 @@ static void InitCutscene(int scene_num)
 			sceneDirectory = Filepath_Generator(SceneDirectory);
 			cutsceneID = "KWA1";
 		}
+                
 		evl_AFS_Utils(0, MOUNT_AFS_PARTITION, sceneDirectory, (uint *)cutsceneID, 0);
+                
 		evl_AFS_Utils(0, NewLoadPAK, (char *)0x0, (uint *)0x0, 0);
+                
 		sceneID = 0;
 	}
   
@@ -161,7 +168,7 @@ static void InitCutscene(int scene_num)
 		if (scene_num == 3) {
 			uVar2 = 0;
 			FUN_0c094520(0xc, 0);
-			uVar1 = 0x3134316c;
+			uVar1 = FOURCC('l','1','4','1');
 		}
 		else {
 			if (scene_num != 4) {
@@ -172,7 +179,7 @@ static void InitCutscene(int scene_num)
 			}
 			uVar2 = 0;
 			FUN_0c094520(0xc, 0);
-			uVar1 = 0x3135316c;
+			uVar1 = FOURCC('l','1','5','1');
 		}
 		FUN_0c0c1cc0(uVar1, uVar2);
 		FUN_0c118000();
@@ -182,7 +189,7 @@ static void InitCutscene(int scene_num)
 
 static void CutscenePlayStateHandler(astruct_86 *evt_ctx)
 {
-	HLib_Task_t *EVNT = EnqueueTaskWithParameter(CutsceneHandler,'\x04',0xb,8,0x544e5645);
+	HLib_Task_t *EVNT = EnqueueTaskWithParameter(CutsceneHandler, 0x04, 0xb, 8, FOURCC('E','V','N','T'));
 	astruct_89 *ppaVar2 = (astruct_89 *)GetTaskParameterPointer(EVNT);
 	ppaVar2->field0_0x0 = (astruct_88*)evt_ctx;
 	ppaVar2->field1_0x4 = 0;
@@ -274,7 +281,7 @@ void LoadWCONDBin(void)
         FUN_0c1a93c0(1, (uint *)"0517");
         
         char* path = Filepath_Generator(SceneDirectory);
-        LoadFile_Wrapper(path,"W_COND.BIN");
+        LoadFile_Wrapper(path, "W_COND.BIN");
         return;
 }
 
@@ -292,12 +299,13 @@ static void ToggleUI()
 
 void _entry start(void)
 {
-        HLib_Task_t* EVNT = EnqueueTaskWithParameter(MainStateHandler, 0x04, 0xb, 0xc, 0x544e5645);
+        HLib_Task_t* EVNT = EnqueueTaskWithParameter(MainStateHandler, 0x04, 0xb, 0xc, FOURCC('E','V','N','T'));
         astruct_86 * EVNT_params = (astruct_86 *)GetTaskParameterPointer(EVNT);
         EVNT_params->pTASK = EVNT;
         
         unsigned int scene = *(int*)(0x0c020164);
         unsigned int area  = *(int*)(0x0c020168);
+        
         int MOTI = ReadMotiFromDirectory(scene, area, "0517A.MOT");  
         EVNT_params->MOTI_memblock = MOTI;
         EVNT_params->scene_num = 0;
