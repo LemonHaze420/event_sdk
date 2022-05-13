@@ -10,46 +10,162 @@
 #define MIN_CUTSCENE_ID 0
 #define MAX_CUTSCENE_ID 4
 
-static char s_SIN__0517_runtime__0c348e04[] = { 0x53, 0x49, 0x4e, 0x5f, 0xff, 0xff, 0xff, 0xff };
+static void FUN_0517_runtime__entrypoint(void);
+static void DebugSelector_EVNT_Callback(astruct_86 *evt_ctx);
+static void HandleStartCutsceneState(astruct_86 *evt_ctx);
+static void StartCutscene(int scene_num);
+static void SetCharacterFlagsAndHandleTaskDestroy(astruct_86 *evt_ctx);
+static void FUN_0517_runtime__0c348760_fsca_wrapper3(ulonglong param_1);
+static void LoadWCONDBin(void);
+static void AllocateEventStorageWrapper(astruct_86 *param_1);
+static void FUN_0517_runtime__0c3488e0(void);
+static void SetCharacterFlags(void);
+static void SetCharaFlags1_Wrapper(int param_1);
+static void SetCharacterFlags_Wrapper(int param_1);
+static void SetCharaFlags_Wrapper(int param_1);
+static void SetCharacterFlags2_Wrapper(int param_1);
+static void EnqueueLoad(undefined4 param_1,astruct_166 *param_2);
+static void FUN_0517_runtime__LOAD_Callback(void);
+static void FUN_0517_runtime__0c348c60(int *param_1);
+static void FUN_0517_runtime__0c348ce0(int param_1);
+
+static astruct_193 unk_struct;
+
+
+
+void FUN_0517_runtime__0c3488e0(void)
+
+{
+  SetCharaFlags1_Wrapper(0x5f4f5952);
+  SetCharaFlags1_Wrapper(0x5f4e4953);
+  SetCharaFlags_Wrapper(0x38383961);
+  SetCharaFlags_Wrapper(0x30393961);
+  SetCharaFlags_Wrapper(0x32393961);
+  SetCharaFlags_Wrapper(0x34393961);
+  SetCharaFlags_Wrapper(0x30343861);
+  SetCharaFlags_Wrapper(0x32343861);
+  SetCharaFlags_Wrapper(0x34343861);
+  SetCharaFlags_Wrapper(0x38343861);
+  return;
+}
+
+
+
+void SetCharacterFlags(void)
+
+{
+  SetCharacterFlags_Wrapper(0x5f4f5952);
+  SetCharacterFlags_Wrapper(0x5f4e4953);
+  SetCharacterFlags2_Wrapper(0x38383961);
+  SetCharacterFlags2_Wrapper(0x30393961);
+  SetCharacterFlags2_Wrapper(0x32393961);
+  SetCharacterFlags2_Wrapper(0x34393961);
+  SetCharacterFlags2_Wrapper(0x30343861);
+  SetCharacterFlags2_Wrapper(0x32343861);
+  SetCharacterFlags2_Wrapper(0x34343861);
+  SetCharacterFlags2_Wrapper(0x38343861);
+  return;
+}
+
+
+
+void SetCharaFlags1_Wrapper(int param_1)
+
+{
+  astruct_51 *paVar1;
+  
+  paVar1 = FindMTWK_ForCEWP();
+  SetCEWPFlags((int)paVar1,6,2);
+  EV_UnknownFunc(param_1);
+  return;
+}
+
+
 
 void SetCharacterFlags_Wrapper(int param_1)
+
 {
+  astruct_51 * paVar1 = FindMTWK_ForCEWP();
+  SetCEWPFlags((int)paVar1,6,0);
+  EV_UnknownFunc(param_1);
   return;
 }
+
+
+void FUN_0517_runtime__0c348ce0(int param_1)
+
+{
+  EV_EnableCharDisplay();
+  FUN_0c077280();
+  FUN_0c077280();
+  FUN_0c092520();
+  EV_UnknownFunc(param_1);
+  return;
+}
+
+
+void SetCharaFlags_Wrapper(int param_1)
+
+{
+  EV_UnknownFunc(param_1);
+  return;
+}
+
+
+
 void SetCharacterFlags2_Wrapper(int param_1)
+
 {
+  EV_UnknownFunc(param_1);
   return;
 }
-void SetCharacterFlags(void)
-{
-  return;
-}
+
+
 void SetCharacterFlagsAndHandleTaskDestroy(astruct_86 *evt_ctx)
-{  
-  return;
-}
-void FUN_0517_runtime__0c348760()
 {
-  return;
-}
-void FUN_0517_runtime__0c3489e0(int param_1)
-{
-  return;
-}
-void FUN_0517_runtime__0c348a60(int param_1)
-{
-  return;
-}
-void FUN_0517_runtime__0c3488e0(void)
-{
+  int iVar1;
+  
+  iVar1 = FUN_0c1542c0(-1);
+  if (iVar1 == 0) {
+    SetCharacterFlags();
+    *(undefined2 *)&evt_ctx->pTASK->field7_0xa = 0;
+    if (*(short *)&evt_ctx->pTASK->field5_0x8 == 3) {
+      //FUN_0c0540e0((HLib_Task_t *)0x7f148d12);
+    }
+    if (*(short *)&evt_ctx->pTASK->field5_0x8 == 0) {
+      FUN_0c093d20();
+      SetTaskDestroyCallback(evt_ctx->pTASK, (undefined *)0x1e);
+    }
+    else {
+      FUN_0c093d20();
+    }
+    FUN_0c054200();
+  }
   return;
 }
 void HandleStartCutsceneState(astruct_86 *evt_ctx)
 {
+  HLib_Task_t *EVNT = EnqueueTaskWithParameter(SetCharacterFlagsAndHandleTaskDestroy,'\x04',0xb,8,0x544e5645);
+  astruct_89 *ppaVar2 = (astruct_89 *)GetTaskParameterPointer(EVNT);
+  ppaVar2->field0_0x0 = evt_ctx;
+  ppaVar2->field1_0x4 = 0;
+  if (evt_ctx->scene_num == 3) {
+    // EnqueueTaskWithoutParameter (FUN_0517_runtime__0c348760_fsca_wrapper3,'\x04',0xb,0x544e5645);
+  }
+  FUN_0c1b0ce0();
+  if (evt_ctx->scene_num == 4) {
+    FUN_0c1afdc0(1,0,0);
+  }
+  else {
+    FUN_0c1afdc0(1,0,0);
+  }
+  FUN_0c1b0b40();
+  FUN_0c093d20();
+  FUN_0517_runtime__0c3488e0();
+  FUN_0c1542c0((int)(short)evt_ctx->scene_num);
+  evt_ctx->cur_state = 2;
   return;
 }
-
-static astruct_193 unk_struct;
 
 void StartCutscene(int scene_num)
 {
@@ -135,15 +251,6 @@ RET:
   return;
 }
  
-void FUN_0517_runtime__0c348c60(int *param_1)
-{
-  return;
-}
-
-void AllocateEventStorageWrapper(astruct_86 *param_1)
-{
-  return;
-}
 static void DebugSelector_EVNT_Callback(astruct_86 *evt_ctx)
 {
         if (evt_ctx->cur_state == START_CUTSCENE) 
@@ -155,7 +262,7 @@ static void DebugSelector_EVNT_Callback(astruct_86 *evt_ctx)
                 if (evt_ctx->cur_state == SELECT_CUTSCENE) 
                 {
                         // handle button presses
-                        uint controllerData = EVT_GetControllerInput(0,1);
+                        uint controllerData = EVT_GetControllerInput(0, 1);
                         if (controllerData == A_BTN) 
                         {
                                 evt_ctx->cur_state = START_CUTSCENE;
@@ -218,10 +325,6 @@ void LoadWCONDBin(void)
         return;
 }
 
-void FUN_0517_runtime__LOAD_Callback(void)
-{
-        return;
-}
 static void ToggleUI()
 {
         char curr_val = *(char*)(0x0C303D94);        
@@ -238,7 +341,7 @@ void _entry start(void)
 {
         HLib_Task_t* EVNT = EnqueueTaskWithParameter(DebugSelector_EVNT_Callback, 0x04, 0xb, 0xc, 0x544e5645);
         astruct_86 * EVNT_params = (astruct_86 *)GetTaskParameterPointer(EVNT);
-        EVNT_params->pTASK = &EVNT->taskCallback;
+        EVNT_params->pTASK = EVNT;
         
         unsigned int scene = *(int*)(0x0c020164);
         unsigned int area  = *(int*)(0x0c020168);
@@ -248,8 +351,9 @@ void _entry start(void)
         EVNT_params->cur_state = 0;
         
         LoadWCONDBin();
+        FUN_0c1003a0();
         
-        EV_NPC_NewLoadSw(1);
+        EV_NPC_NewLoadSw(0);
         FUN_0c1003a0();
         
         //if (TASK != (HLib_Task_t *)0x0) {
