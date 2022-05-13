@@ -18,14 +18,6 @@
 #define SEQ_NAME                "0517"
 #define W_COND_N                "W_COND.BIN"
 
-__FORCEINLINE unsigned int GetCurrentScene() {
-        return *(int*)(0x0c020164);
-}
-
-__FORCEINLINE unsigned int GetCurrentArea() {
-        return *(int*)(0x0c020168);
-}
-
 static void init_cutscene_viewer(void);
 
 static void MainStateHandler(astruct_86 *evt_ctx);
@@ -48,15 +40,35 @@ static void LOAD_Callback(void);
 
 static astruct_193 unk_struct;
 
-static void debug_task_callback(void)
-{
-        return;
-}
+static HLib_Task_t* debug_task;
+static void debug_info_callback(void);
+
+static char bDisplay = 1;
 
 void _entry start()
 {
-        load_scene(debug_task_callback, 1);
+        debug_task = EnqueueTaskWithoutParameter(debug_info_callback, 0x4, 0xb, FOURCC('D','B','G','T'));
         init_cutscene_viewer();
+        return;
+}
+
+static void debug_info_callback(void)
+{
+        if (bDisplay)
+        {
+                set_debug_screen_text_position(10, 1);
+                debug_log_to_screen("LemonHaze420 - 2022\n");
+                
+                set_debug_screen_text_position(1, 15);
+                debug_log_to_screen("%s\narea = %c%c%c%c\n", GetCurrentTake(), (char)GetCurrentArea(), GetCurrentArea() >> 8, GetCurrentArea() >> 16, GetCurrentArea() >> 24);
+                debug_log_to_screen("disk = %d \nfile = %s\ndire = %s\n", GetCurrentDiskNum(), GetCurrentOpenedFile(), GetCurrentDirectoryEntry());
+                debug_log_to_screen("task = %c%c%c%c\n", (char)GetCurrentTaskName(),  GetCurrentTaskName() >> 8,  GetCurrentTaskName() >> 16,  GetCurrentTaskName() >> 24);
+                debug_log_to_screen("step = %d\n", GetCurrentStep());
+        }
+        
+        uint controller_input = EVT_GetControllerInput(0, 1);
+        if ((controller_input & START) && (controller_input & X_BTN))
+                bDisplay = !bDisplay;
         return;
 }
 

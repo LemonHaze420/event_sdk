@@ -40,13 +40,13 @@ __FORCEINLINE void load_scene(void* callbackFn, char bDevelopment)
                 FUN_0c1b0b40();                         
         }
         
-        HLib_Task_t * p_controller_input_task = EnqueueTaskWithoutParameter(callbackFn, 0x04, 0xb, FOURCC('E','V','N','T'));
+        HLib_Task_t * TASK = EnqueueTaskWithoutParameter(callbackFn, 0x04, 0xb, FOURCC('E','V','N','T'));
         if (bDevelopment)
         {
                 FUN_0c0c01c0(0,2);                      
                 FUN_0c0c0020(0,1);                      
         }
-        FUN_0c0949e0(p_controller_input_task);
+        FUN_0c0949e0(TASK);
         EV_FinishLoading();                       
 }
 
@@ -62,6 +62,62 @@ __FORCEINLINE void LoadAfsPartition(char* szName) {
 __FORCEINLINE void* GetMapControlTaskParameterPointer() {
         unsigned int MapControlTask = *(int*)(0x0c2d4e54);
         return GetTaskParameterPointer(&MapControlTask);
+}
+
+/*   
+     Returns a string pointer of the build's TAKE.
+*/
+__FORCEINLINE char* GetCurrentTake() {
+        return &*(char*)(GLOBAL_TAKE_OFFSET);
+}
+
+/*
+     Returns the current task name.
+*/
+__FORCEINLINE unsigned int GetCurrentTaskName() {
+        return *(int*)(GLOBAL_CURR_TASK_OFFSET);
+}
+
+/*
+     Returns the current scene.
+*/
+__FORCEINLINE unsigned int GetCurrentScene() {
+        return *(int*)(GLOBAL_SCENE_OFFSET);
+}
+
+/*
+     Returns the current directory entry.
+*/
+__FORCEINLINE char* GetCurrentDirectoryEntry() {
+        return &*(char*)(GLOBAL_CURR_DIRE_OFFSET);
+}
+
+/*
+     Returns the currently opened file name.
+*/
+__FORCEINLINE char* GetCurrentOpenedFile() {
+        return &*(char*)(GLOBAL_CURR_FILE_OFFSET);
+}
+
+/*
+     Returns the current disk number.
+*/
+__FORCEINLINE unsigned int GetCurrentDiskNum() {
+        return *(int*)(GLOBAL_DISKNUM_OFFSET);
+}
+
+/*
+     Returns the current area.
+*/
+__FORCEINLINE unsigned int GetCurrentArea() {
+        return *(int*)(GLOBAL_AREA_OFFSET);
+}
+
+/*
+     Returns the current step value.
+*/
+__FORCEINLINE unsigned int GetCurrentStep() {
+        return *(int*)(GLOBAL_STEP_OFFSET);
 }
 
 #endif

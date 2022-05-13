@@ -1,43 +1,52 @@
 #ifndef _TYPES_H_
 #define _TYPES_H_
 
-#define g_task_context_OFFS     0x0c020200-0xC
-#define EV_SCRIPT_FUNC_TBL_OFFS 0x0c020200
-#define TBL_ADDR(f)             *(int*)((EV_SCRIPT_FUNC_TBL_OFFS+(f*4)))
+#define GLOBAL_TAKE_OFFSET              0x0c020100
+#define GLOBAL_CURR_TASK_OFFSET         0x0c020110
+#define GLOBAL_SCENE_OFFSET             0x0c020118
+#define GLOBAL_CURR_DIRE_OFFSET         0x0c020120
+#define GLOBAL_CURR_FILE_OFFSET         0x0c020140 
+#define GLOBAL_DISKNUM_OFFSET           0x0c020164
+#define GLOBAL_AREA_OFFSET              0x0c020168
+#define GLOBAL_STEP_OFFSET              0x0c020178
+#define GLOBAL_TASK_CONTEXT_OFFS        0x0c0201f4
+#define EV_SCRIPT_FUNC_TBL_OFFS         0x0c020200
+
+#define TBL_ADDR(f)                     *(int*)((EV_SCRIPT_FUNC_TBL_OFFS+(f*4)))
 
 // Button input values
-#define UP      0x1000
-#define DOWN    0x2000
+#define UP                              0x1000
+#define DOWN                            0x2000
 
-#define LEFT    0x4000
-#define RIGHT   0x8000
+#define LEFT                            0x4000
+#define RIGHT                           0x8000
 
-#define A_BTN   0x400
-#define B_BTN   0x200
-#define X_BTN   0x4
-#define Y_BTN   0x2
+#define A_BTN                           0x400
+#define B_BTN                           0x200
+#define X_BTN                           0x4
+#define Y_BTN                           0x2
 
-#define START   0x800
+#define START                           0x800
 
-#define LB      0x41
-#define RB      0x180
+#define LB                              0x41
+#define RB                              0x180
 
-#define RT      0x8
+#define RT                              0x8
 
-typedef unsigned char           undefined;
-typedef unsigned char           bool;
-typedef unsigned char           byte;
-typedef long long               longlong;
-typedef unsigned char           uchar;
-typedef unsigned int            uint;
-typedef unsigned long long      ulonglong;
-typedef unsigned char           undefined1;
-typedef unsigned short          undefined2;
-typedef unsigned int            undefined4;
-typedef unsigned long long      undefined8;
-typedef unsigned short          ushort;
-typedef unsigned short          word;
-typedef char                    string;
+typedef unsigned char                   undefined;
+typedef unsigned char                   bool;
+typedef unsigned char                   byte;
+typedef long long                       longlong;
+typedef unsigned char                   uchar;
+typedef unsigned int                    uint;
+typedef unsigned long long              ulonglong;
+typedef unsigned char                   undefined1;
+typedef unsigned short                  undefined2;
+typedef unsigned int                    undefined4;
+typedef unsigned long long              undefined8;
+typedef unsigned short                  ushort;
+typedef unsigned short                  word;
+typedef char                            string;
 
 typedef enum AFSUtilMode {
     MOUNT_AFS_PARTITION=0,
