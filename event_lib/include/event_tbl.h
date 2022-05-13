@@ -1620,8 +1620,8 @@ __FORCEINLINE void FUN_0c091b80 () {
 		((void (*)())(void*)TBL_ADDR(IDX_FUN_0c091b80)) ();
 }
 
-__FORCEINLINE astruct_51 * FindMTWK_ForCEWP () {
-		return ((astruct_51 * (*)())(void*)TBL_ADDR(IDX_FindMTWK_ForCEWP)) ();
+__FORCEINLINE astruct_51 * FindMTWK_ForCEWP (int param_1) {
+		return ((astruct_51 * (*)(int))(void*)TBL_ADDR(IDX_FindMTWK_ForCEWP)) (param_1);
 }
 
 __FORCEINLINE void FUN_0c0f4fa0 () {
@@ -2224,8 +2224,8 @@ __FORCEINLINE void SetPlayerCashOrMoney (int value, int nMode) {
 		((void (*)(int, int))(void*)TBL_ADDR(IDX_SetPlayerCashOrMoney)) (value, nMode);
 }
 
-__FORCEINLINE void fsca_wrapper3 (undefined4 param_1, int param_2, uint param_3) {
-		((void (*)(undefined4, int, uint))(void*)TBL_ADDR(IDX_fsca_wrapper3)) (param_1, param_2, param_3);
+__FORCEINLINE undefined8 fsca_wrapper3 (undefined4 param_1, float * param_2, float * param_3) {
+		return ((undefined8 (*)(undefined4, float *, float *))(void*)TBL_ADDR(IDX_fsca_wrapper3)) (param_1, param_2, param_3);
 }
 
 __FORCEINLINE void FUN_0c04c678 (undefined4 param_1, uint param_2) {

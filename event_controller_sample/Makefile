@@ -1,5 +1,5 @@
 include ../event_lib/Makefile
-TARGET=simple_example.$(TYPE)
+TARGET=controller_input.$(TYPE)
 
 all: rm-elf $(TARGET)
 
