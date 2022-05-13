@@ -29,6 +29,6 @@ else
 endif
 
 CC=sh4-elf-gcc
-CFLAGS=-ml -m4 -T ../event_lib/linker.x -nostartfiles -nostdlib -Wno-builtin-declaration-mismatch -fpic -Wa,-I./ -I/usr/include/ -I../event_lib/include -Ttext=$(VMA) 
+CFLAGS=-O2 -ml -m4 -T ../event_lib/linker.x -nostartfiles -nostdlib -Wno-builtin-declaration-mismatch -fpic -I./ -I/usr/include/ -I../event_lib/include -Ttext=$(VMA) 
 OBJCOPY=sh4-elf-objcopy --adjust-vma=$(VMA) -O binary -R .stack
 TARGET=event.$(TYPE)
