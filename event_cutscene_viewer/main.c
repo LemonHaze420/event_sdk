@@ -22,8 +22,8 @@ static void FUN_0517_runtime__0c3488e0(void);
 static void SetCharacterFlags(void);
 static void SetCharaFlags1_Wrapper(int param_1);
 static void SetCharacterFlags_Wrapper(int param_1);
-static void SetCharaFlags_Wrapper(int param_1);
-static void SetCharacterFlags2_Wrapper(int param_1);
+static void EV_UnknownFunc(int param_1);
+static void EV_UnknownFunc(int param_1);
 static void EnqueueLoad(undefined4 param_1,astruct_166 *param_2);
 static void FUN_0517_runtime__LOAD_Callback(void);
 static void FUN_0517_runtime__0c348c60(int *param_1);
@@ -31,59 +31,45 @@ static void FUN_0517_runtime__0c348ce0(int param_1);
 
 static astruct_193 unk_struct;
 
-
-
 void FUN_0517_runtime__0c3488e0(void)
-
 {
   SetCharaFlags1_Wrapper(0x5f4f5952);
   SetCharaFlags1_Wrapper(0x5f4e4953);
-  SetCharaFlags_Wrapper(0x38383961);
-  SetCharaFlags_Wrapper(0x30393961);
-  SetCharaFlags_Wrapper(0x32393961);
-  SetCharaFlags_Wrapper(0x34393961);
-  SetCharaFlags_Wrapper(0x30343861);
-  SetCharaFlags_Wrapper(0x32343861);
-  SetCharaFlags_Wrapper(0x34343861);
-  SetCharaFlags_Wrapper(0x38343861);
+  EV_UnknownFunc(0x38383961);
+  EV_UnknownFunc(0x30393961);
+  EV_UnknownFunc(0x32393961);
+  EV_UnknownFunc(0x34393961);
+  EV_UnknownFunc(0x30343861);
+  EV_UnknownFunc(0x32343861);
+  EV_UnknownFunc(0x34343861);
+  EV_UnknownFunc(0x38343861);
   return;
 }
 
-
-
 void SetCharacterFlags(void)
-
 {
   SetCharacterFlags_Wrapper(0x5f4f5952);
   SetCharacterFlags_Wrapper(0x5f4e4953);
-  SetCharacterFlags2_Wrapper(0x38383961);
-  SetCharacterFlags2_Wrapper(0x30393961);
-  SetCharacterFlags2_Wrapper(0x32393961);
-  SetCharacterFlags2_Wrapper(0x34393961);
-  SetCharacterFlags2_Wrapper(0x30343861);
-  SetCharacterFlags2_Wrapper(0x32343861);
-  SetCharacterFlags2_Wrapper(0x34343861);
-  SetCharacterFlags2_Wrapper(0x38343861);
+  EV_UnknownFunc(0x38383961);
+  EV_UnknownFunc(0x30393961);
+  EV_UnknownFunc(0x32393961);
+  EV_UnknownFunc(0x34393961);
+  EV_UnknownFunc(0x30343861);
+  EV_UnknownFunc(0x32343861);
+  EV_UnknownFunc(0x34343861);
+  EV_UnknownFunc(0x38343861);
   return;
 }
 
-
-
 void SetCharaFlags1_Wrapper(int param_1)
-
 {
-  astruct_51 *paVar1;
-  
-  paVar1 = FindMTWK_ForCEWP();
+  astruct_51 *paVar1 = FindMTWK_ForCEWP();
   SetCEWPFlags((int)paVar1,6,2);
   EV_UnknownFunc(param_1);
   return;
 }
 
-
-
 void SetCharacterFlags_Wrapper(int param_1)
-
 {
   astruct_51 * paVar1 = FindMTWK_ForCEWP();
   SetCEWPFlags((int)paVar1,6,0);
@@ -91,9 +77,7 @@ void SetCharacterFlags_Wrapper(int param_1)
   return;
 }
 
-
 void FUN_0517_runtime__0c348ce0(int param_1)
-
 {
   EV_EnableCharDisplay();
   FUN_0c077280();
@@ -103,29 +87,9 @@ void FUN_0517_runtime__0c348ce0(int param_1)
   return;
 }
 
-
-void SetCharaFlags_Wrapper(int param_1)
-
-{
-  EV_UnknownFunc(param_1);
-  return;
-}
-
-
-
-void SetCharacterFlags2_Wrapper(int param_1)
-
-{
-  EV_UnknownFunc(param_1);
-  return;
-}
-
-
 void SetCharacterFlagsAndHandleTaskDestroy(astruct_86 *evt_ctx)
 {
-  int iVar1;
-  
-  iVar1 = FUN_0c1542c0(-1);
+  int iVar1 = FUN_0c1542c0(-1);
   if (iVar1 == 0) {
     SetCharacterFlags();
     *(undefined2 *)&evt_ctx->pTASK->field7_0xa = 0;
