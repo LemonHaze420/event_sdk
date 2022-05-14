@@ -289,16 +289,16 @@
 #define IDX_EnqueueTaskWithoutParameterWrapper_2 						281
 #define IDX_TaskCleanupCurrentTask 						282
 #define IDX_GetTaskParameterPointer 						283
-#define IDX_FUN_0c0540e0 						284
+#define IDX_FreeTask 						284
 #define IDX_SetDestroyCallbackOnCurrentTask_Wrapper 						285
 #define IDX_UpdateActiveTask 						286
 #define IDX_EnqueueTaskWithParameter 						287
 #define IDX_FUN_0c0550c0 						288
 #define IDX_FUN_0c055160 						289
 #define IDX_SetTaskDestroyCallback 						290
-#define IDX_FUN_0c054880 						291
+#define IDX_SetMainCallbackToDestroy 						291
 #define IDX_FUN_0c054200 						292
-#define IDX_FUN_0c054220 						293
+#define IDX_FreeTask_Wrapper 						293
 #define IDX_get_task_queue 						294
 #define IDX_SetDestroyCallback 						295
 #define IDX_FUN_0c0549c0 						296
@@ -1504,12 +1504,12 @@ __FORCEINLINE void FUN_0c093040 () {
 		((void (*)())(void*)TBL_ADDR(IDX_FUN_0c093040)) ();
 }
 
-__FORCEINLINE void EV_EnableCharDisplay () {
-		((void (*)())(void*)TBL_ADDR(IDX_EV_EnableCharDisplay)) ();
+__FORCEINLINE void EV_EnableCharDisplay (undefined4 chara_id) {
+		((void (*)(undefined4))(void*)TBL_ADDR(IDX_EV_EnableCharDisplay)) (chara_id);
 }
 
-__FORCEINLINE void EV_DisableCharDisplay () {
-		((void (*)())(void*)TBL_ADDR(IDX_EV_DisableCharDisplay)) ();
+__FORCEINLINE void EV_DisableCharDisplay (undefined4 chara_id) {
+		((void (*)(undefined4))(void*)TBL_ADDR(IDX_EV_DisableCharDisplay)) (chara_id);
 }
 
 __FORCEINLINE void FUN_0c093100 () {
@@ -1976,8 +1976,8 @@ __FORCEINLINE void * GetTaskParameterPointer (void * param_1) {
 		return ((void * (*)(void *))(void*)TBL_ADDR(IDX_GetTaskParameterPointer)) (param_1);
 }
 
-__FORCEINLINE undefined4 FUN_0c0540e0 (HLib_Task_t * param_1) {
-		return ((undefined4 (*)(HLib_Task_t *))(void*)TBL_ADDR(IDX_FUN_0c0540e0)) (param_1);
+__FORCEINLINE undefined4 FreeTask (HLib_Task_t * TASK) {
+		return ((undefined4 (*)(HLib_Task_t *))(void*)TBL_ADDR(IDX_FreeTask)) (TASK);
 }
 
 __FORCEINLINE void SetDestroyCallbackOnCurrentTask_Wrapper (undefined4 param_1) {
@@ -2004,16 +2004,16 @@ __FORCEINLINE void SetTaskDestroyCallback (HLib_Task_t * TASK, undefined * param
 		((void (*)(HLib_Task_t *, undefined *))(void*)TBL_ADDR(IDX_SetTaskDestroyCallback)) (TASK, param_2);
 }
 
-__FORCEINLINE void FUN_0c054880 (undefined4 * param_1) {
-		((void (*)(undefined4 *))(void*)TBL_ADDR(IDX_FUN_0c054880)) (param_1);
+__FORCEINLINE void SetMainCallbackToDestroy (HLib_Task_t * TASK) {
+		((void (*)(HLib_Task_t *))(void*)TBL_ADDR(IDX_SetMainCallbackToDestroy)) (TASK);
 }
 
 __FORCEINLINE void FUN_0c054200 () {
 		((void (*)())(void*)TBL_ADDR(IDX_FUN_0c054200)) ();
 }
 
-__FORCEINLINE void FUN_0c054220 (HLib_Task_t * param_1) {
-		((void (*)(HLib_Task_t *))(void*)TBL_ADDR(IDX_FUN_0c054220)) (param_1);
+__FORCEINLINE void FreeTask_Wrapper (HLib_Task_t * TASK) {
+		((void (*)(HLib_Task_t *))(void*)TBL_ADDR(IDX_FreeTask_Wrapper)) (TASK);
 }
 
 __FORCEINLINE astruct_15 * get_task_queue () {
