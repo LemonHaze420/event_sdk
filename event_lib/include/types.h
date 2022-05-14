@@ -14,6 +14,12 @@
 
 #define TBL_ADDR(f)                     *(int*)((EV_SCRIPT_FUNC_TBL_OFFS+(f*4)))
 
+// Character IDs
+#define RYO_                            FOURCC('R', 'Y', 'O', '_')
+#define SIN_                            FOURCC('S', 'I', 'N', '_')
+
+#define ID_END                          0xFFFFFFFF
+
 // Button input values
 #define UP                              0x1000
 #define DOWN                            0x2000
