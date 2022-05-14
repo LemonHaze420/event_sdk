@@ -7,51 +7,6 @@
 #include "common.h"
 #include "cutscene_viewer.h"
 
-#define MIN_CUTSCENE_ID         0
-#define MAX_CUTSCENE_ID         4
-
-#define MAP1_NAME               "KWW1"
-#define MAP2_NAME               "KWA1"
-#define MAP3_NAME               "KWA2"
-
-#define MOT_NAME                "0517A.MOT"
-#define SEQ_NAME                "0517"
-#define W_COND_N                "W_COND.BIN"
-
-static void init_cutscene_viewer(void);
-
-static void MainStateHandler(astruct_86 *evt_ctx);
-static void CutscenePlayStateHandler(astruct_86 *evt_ctx);
-static void CutsceneHandler(astruct_86 *evt_ctx);
-static void AllocateEventStorageWrapper(astruct_86 * ctx);
-
-static void InitCutscene(int scene_num);
-static void FUN_0517_runtime__0c348760_fsca_wrapper3(ulonglong param_1);
-static void LoadWCONDBin(void);
-
-static void SetCEWP_MTWK_FlagTo2(int param_1);
-static void SetCEWP_MTWK_FlagTo2_Wrapper(void);
-
-static void SetCEWP_MTWK_FlagTo0(int param_1);
-static void SetCEWP_MTWK_FlagTo0_Wrapper(void);
-
-static void EnqueueLoad(undefined4 param_1, astruct_166 *param_2);
-static void LOAD_Callback(void);
-
-static astruct_193 unk_struct;
-
-static HLib_Task_t* debug_task;
-static void debug_info_callback(void);
-
-static char bDisplay = 1;
-
-void _entry start()
-{
-        debug_task = EnqueueTaskWithoutParameter(debug_info_callback, 0x4, 0xb, FOURCC('D','B','G','T'));
-        init_cutscene_viewer();
-        return;
-}
-
 static void debug_info_callback(void)
 {
         if (bDisplay)
@@ -59,16 +14,29 @@ static void debug_info_callback(void)
                 set_debug_screen_text_position(10, 1);
                 debug_log_to_screen("LemonHaze420 - 2022\n");
                 
-                set_debug_screen_text_position(1, 15);
+                set_debug_screen_text_position(1, 10);
                 debug_log_to_screen("%s\narea = %c%c%c%c\n", GetCurrentTake(), (char)GetCurrentArea(), GetCurrentArea() >> 8, GetCurrentArea() >> 16, GetCurrentArea() >> 24);
                 debug_log_to_screen("disk = %d \nfile = %s\ndire = %s\n", GetCurrentDiskNum(), GetCurrentOpenedFile(), GetCurrentDirectoryEntry());
                 debug_log_to_screen("task = %c%c%c%c\n", (char)GetCurrentTaskName(),  GetCurrentTaskName() >> 8,  GetCurrentTaskName() >> 16,  GetCurrentTaskName() >> 24);
                 debug_log_to_screen("step = %d\n", GetCurrentStep());
         }
         
-        uint controller_input = EVT_GetControllerInput(0, 1);
-        if ((controller_input & START) && (controller_input & X_BTN))
+        uint controller_input = EVT_GetControllerInput(0, 2);
+        if (controller_input & UP)
                 bDisplay = !bDisplay;
+        else if (controller_input & DOWN)
+                ToggleUI();   
+        else if (controller_input & LEFT)
+                EV_SetPlayerControlFlags(1);   
+        else if (controller_input & RIGHT)
+                EV_SetPlayerControlFlags(0);         
+        return;
+}
+
+void _entry start()
+{
+        EnqueueTaskWithoutParameter(debug_info_callback, 0x4, 0xb, DBGT_NAME);
+        init_cutscene_viewer();
         return;
 }
 
@@ -90,8 +58,8 @@ static void SetCEWP_MTWK_FlagTo2(int charaID)
 
 static void SetCEWP_MTWK_FlagTo0_Wrapper(void)
 {
-	SetCEWP_MTWK_FlagTo0(FOURCC('R', 'Y', 'O', '_'));
-	SetCEWP_MTWK_FlagTo0(FOURCC('S', 'I', 'N', '_'));
+	SetCEWP_MTWK_FlagTo0(RYO_);
+	SetCEWP_MTWK_FlagTo0(SIN_);
         
 	EV_UnknownFunc(FOURCC('a','9','8','8'));
 	EV_UnknownFunc(FOURCC('a','9','9','0'));
@@ -106,8 +74,8 @@ static void SetCEWP_MTWK_FlagTo0_Wrapper(void)
 
 static void SetCEWP_MTWK_FlagTo2_Wrapper(void)
 {
-	SetCEWP_MTWK_FlagTo2(FOURCC('R', 'Y', 'O', '_'));
-	SetCEWP_MTWK_FlagTo2(FOURCC('S', 'I', 'N', '_'));
+	SetCEWP_MTWK_FlagTo2(RYO_);
+	SetCEWP_MTWK_FlagTo2(SIN_);
         
 	EV_UnknownFunc(FOURCC('a','9','8','8'));
 	EV_UnknownFunc(FOURCC('a','9','9','0'));
@@ -127,7 +95,7 @@ static void CutsceneHandler(astruct_86 *evt_ctx)
 		SetCEWP_MTWK_FlagTo0_Wrapper();
 		*(undefined2 *)&evt_ctx->pTASK->field7_0xa = 0;
 		if (*(short *)&evt_ctx->pTASK->field5_0x8 == 3) {
-			//FUN_0c0540e0((HLib_Task_t *)0x7f148d12);
+			FreeTask(evt_ctx->pTASK);
 		}
 		if (*(short *)&evt_ctx->pTASK->field5_0x8 == 0) {
 			FUN_0c093d20();
@@ -166,34 +134,26 @@ static void InitCutscene(int scene_num)
 		evl_AFS_Utils(0, IsLoaded_6, MAP3_NAME, (uint *)0x0,0);
 	}
 
-	char *sceneDirectory;
+	char *sceneDirectory = Filepath_Generator(SceneDirectory);
 	if (scene_num == 0) {
 		unk_struct.field4_0x4 = '\b';
     
-		sceneDirectory = Filepath_Generator(SceneDirectory);
 		evl_AFS_Utils(0, MOUNT_AFS_PARTITION, sceneDirectory, (uint *)MAP1_NAME,0);
 		evl_AFS_Utils(0, NewLoadPAK, (char *)0x0, (uint *)0x0,0);
 		cutsceneID = MAP1_NAME;
 		sceneID = scene_num;
 	}
 	else {
+                unk_struct.field4_0x4 = '\x12';
+                
 		if ((scene_num < 0) || (2 < scene_num)) {
-			unk_struct.field4_0x4 = '\x12';
-      
-			sceneDirectory = Filepath_Generator(SceneDirectory);
 			cutsceneID = MAP3_NAME;
-		}
-		else {
-			unk_struct.field4_0x4 = '\x12';
-      
-			sceneDirectory = Filepath_Generator(SceneDirectory);
+		} else {
 			cutsceneID = MAP2_NAME;
 		}
                 
 		evl_AFS_Utils(0, MOUNT_AFS_PARTITION, sceneDirectory, (uint *)cutsceneID, 0);
-                
 		evl_AFS_Utils(0, NewLoadPAK, (char *)0x0, (uint *)0x0, 0);
-                
 		sceneID = 0;
 	}
   
@@ -206,7 +166,6 @@ static void InitCutscene(int scene_num)
 	}
 	else {
 		if (scene_num == 3) {
-			uVar2 = 0;
 			FUN_0c094520(0xc, 0);
 			uVar1 = FOURCC('l','1','4','1');
 		}
@@ -217,10 +176,10 @@ static void InitCutscene(int scene_num)
 				FUN_0c0c0020(0, 1);
 				return;
 			}
-			uVar2 = 0;
 			FUN_0c094520(0xc, 0);
 			uVar1 = FOURCC('l','1','5','1');
 		}
+                uVar2 = 0;
 		FUN_0c0c1cc0(uVar1, uVar2);
 		FUN_0c118000();
 	}
@@ -237,19 +196,36 @@ static void CutscenePlayStateHandler(astruct_86 *evt_ctx)
                 //EnqueueTaskWithoutParameter (FUN_0517_runtime__0c348760_fsca_wrapper3,'\x04',0xb,0x544e5645);
 	}
 	FUN_0c1b0ce0();
-        // ?????? always does it anyway ???
-	if (evt_ctx->scene_num == 4) {
-		FUN_0c1afdc0(1,0,0);
-	}
-	else {
-		FUN_0c1afdc0(1,0,0);
-	}
+        FUN_0c1afdc0(1,0,0);
 	FUN_0c1b0b40();
 	FUN_0c093d20();
 	SetCEWP_MTWK_FlagTo2_Wrapper();
 	FUN_0c1542c0((int)(short)evt_ctx->scene_num);
 	evt_ctx->cur_state = UNK_STATE;
 	return;
+}
+
+void UnloadCharactersInTable(int *param_1)
+{  
+        int iVar2 = *param_1;
+        while (iVar2 != -1) {
+                if (EV_IsCharacterExist(param_1) != 0) {
+                        FUN_0c100100(*param_1);
+                        FUN_0c1007e0(*param_1);
+                }
+                param_1 = param_1 + 1;
+                iVar2 = *param_1;
+        }
+        return;
+}
+
+static void AllocateEventStorageWrapper(astruct_86 *evt_ctx)
+{
+        UnloadCharactersInTable(&character_tbl);
+        FUN_0c1a93c0(0, (uint *)"0517");
+        FUN_0c0e9320(evt_ctx->MOTI_memblock);
+        FreeTask_Wrapper(evt_ctx->pTASK);
+        FUN_0c093e60(GetCurrentScene(), FOURCC('K','W','Q','A'), 0);
 }
 
 static void MainStateHandler(astruct_86 *evt_ctx)
@@ -273,16 +249,14 @@ static void MainStateHandler(astruct_86 *evt_ctx)
                         else 
                         {
                                 // Left = Backwards
-                                if (controllerData == LEFT) 
+                                // Right = Forwards
+                                if (controllerData == LEFT || controllerData == RIGHT) 
                                 {
-                                        evt_ctx->scene_num--;
+                                        controllerData == LEFT ? evt_ctx->scene_num-- : evt_ctx->scene_num++;
+                                        
                                         if (evt_ctx->scene_num == (MIN_CUTSCENE_ID - 1) || evt_ctx->scene_num == 0xFFFF)
                                                 evt_ctx->scene_num = MAX_CUTSCENE_ID;
-                                } 
-                                // Right = Forwards
-                                else if (controllerData == RIGHT) 
-                                {
-                                        evt_ctx->scene_num++;
+                                        
                                         if (MAX_CUTSCENE_ID < evt_ctx->scene_num)
                                                 evt_ctx->scene_num = MIN_CUTSCENE_ID;
                                 }
@@ -312,7 +286,7 @@ static void MainStateHandler(astruct_86 *evt_ctx)
         }
         else if (evt_ctx->cur_state == LOAD_STATE) 
         {
-                //AllocateEventStorageWrapper(evt_ctx);
+                AllocateEventStorageWrapper(evt_ctx);
         }
         return;
 }
@@ -339,9 +313,72 @@ static void ToggleUI()
         }
 }
 
+static void SetEnableCharacterFlags(int chara_id)
+{
+        EV_EnableCharDisplay(chara_id);
+        FUN_0c077280();
+        FUN_0c077280();
+        FUN_0c092520();
+        EV_UnknownFunc(chara_id);
+        return;
+}
+
+static void LOAD_Callback(void)
+{
+        int *tmp_ptr, *next_ptr;
+        int is_valid, should_load_hands;
+                
+        if (global_init == 0) {
+                FUN_0c0ffe80(*global_chara_tbl_ptr);
+                FUN_0c1005e0(*global_chara_tbl_ptr);
+                global_init = 1;
+        }
+        else {
+                is_valid = FUN_0c1005e0(*global_chara_tbl_ptr);
+                if (is_valid != 0) {
+                        SetEnableCharacterFlags(*global_chara_tbl_ptr);
+                        if (global_should_load_hi_poly_hands_flag != 0) {
+                                should_load_hands = EV_DispUpHandModel(*global_chara_tbl_ptr);
+                                AllocateHNDL_HNDR_ForChara(should_load_hands);
+                        }
+                        
+                        next_ptr = global_chara_tbl_ptr + 1;
+                        global_init = 0;
+                        
+                        tmp_ptr = global_chara_tbl_ptr + 1;
+                        global_chara_tbl_ptr = next_ptr;
+                        
+                        if (*tmp_ptr == -1) {
+                                global_has_loaded_flag = 1;
+                                if (global_load_task_ptr != (HLib_Task_t *)0x0) {
+                                        SetMainCallbackToDestroy(global_load_task_ptr);
+                                }
+                                TaskCleanupCurrentTask();
+                        }
+                }
+        }
+        return;  
+}
+
+static void EnqueueLoad(undefined4 chara_tbl, HLib_Task_t* TASK)
+{
+        global_init = 0;
+        global_has_loaded_flag = 0;
+        global_chara_tbl_ptr = chara_tbl;
+        global_load_task_ptr = TASK;    
+        
+        EV_NPC_NewLoadSw(0);
+        FUN_0c1003a0();
+        // if (TASK != (HLib_Task_t *)0x0) 
+        //        SetTaskDestroyCallback(TASK, (undefined *)0x0);
+        
+        EnqueueTaskWithoutParameter(LOAD_Callback, 6, 0xb, LOAD_NAME);
+        return;        
+}
+
 void init_cutscene_viewer(void)
 {
-        HLib_Task_t* EVNT = EnqueueTaskWithParameter(MainStateHandler, 0x04, 0xb, 0xc, FOURCC('E','V','N','T'));
+        HLib_Task_t* EVNT = EnqueueTaskWithParameter(MainStateHandler, 0x04, 0xb, 0xc, CVWR_NAME);
         astruct_86 * EVNT_params = (astruct_86 *)GetTaskParameterPointer(EVNT);
         EVNT_params->pTASK = EVNT;
         
@@ -351,13 +388,6 @@ void init_cutscene_viewer(void)
         EVNT_params->cur_state = 0;
         
         LoadWCONDBin();
-        FUN_0c1003a0();
         
-        EV_NPC_NewLoadSw(0);
-        FUN_0c1003a0();
-        
-        //if (TASK != (HLib_Task_t *)0x0) {
-                // SetTaskDestroyCallback(TASK, (undefined *)0x0);
-        //}
-        // EnqueueTaskWithoutParameter(LOAD_Callback, 0x06,0xb, FOURCC('l','o','a','d'));
+        EnqueueLoad(&character_tbl, EVNT_params->pTASK);
 }
