@@ -17,8 +17,8 @@
 #define LOAD_NAME               FOURCC('l','o','a','d')
 
 static unsigned int character_tbl[2] = {
-                SIN_,
-                ID_END
+        SIN_,
+        ID_END
 };
 
 enum State {
