@@ -48,16 +48,19 @@ You should now have a working development environment to run `make` in any of th
 Building the scripts is as easy as invoking `make` in a directory containing the included sample Makefile. In order to build..
 
 an EV1:
+
     ```
       make -j TYPE=EV1
     ```
     
 an EV2:
+
     ```
       make -j TYPE=EV2
     ```
     
 an EV3:
+
     ```
       make -j TYPE=EV3
     ```

@@ -1,5 +1,5 @@
 include ../event_lib/Makefile
-TARGET=0517.$(TYPE)
+TARGET=CVWR.$(TYPE)
 #CC=sh4-elf-g++
 
 all: rm-elf $(TARGET)
