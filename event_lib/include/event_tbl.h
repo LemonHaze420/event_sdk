@@ -339,7 +339,7 @@
 #define IDX_FUN_0c0935e0 						336
 #define IDX_FUN_0c0936a0 						337
 #define IDX_FUN_0c0936e0 						338
-#define IDX_LoadHandsMaybe 						339
+#define IDX_AllocateHNDL_HNDR_ForChara 						339
 #define IDX_FUN_0c1415a0 						340
 #define IDX_FUN_0c0aef40 						341
 #define IDX_FUN_0c095a40 						342
@@ -1608,8 +1608,8 @@ __FORCEINLINE void FUN_0c190aa0 () {
 		((void (*)())(void*)TBL_ADDR(IDX_FUN_0c190aa0)) ();
 }
 
-__FORCEINLINE undefined4 EV_DispUpHandModel () {
-		return ((undefined4 (*)())(void*)TBL_ADDR(IDX_EV_DispUpHandModel)) ();
+__FORCEINLINE undefined4 EV_DispUpHandModel (undefined4 param_1) {
+		return ((undefined4 (*)(undefined4))(void*)TBL_ADDR(IDX_EV_DispUpHandModel)) (param_1);
 }
 
 __FORCEINLINE void FUN_0c091ac0 () {
@@ -2176,8 +2176,8 @@ __FORCEINLINE void FUN_0c0936e0 (int param_1, uint param_2, int * param_3) {
 		((void (*)(int, uint, int *))(void*)TBL_ADDR(IDX_FUN_0c0936e0)) (param_1, param_2, param_3);
 }
 
-__FORCEINLINE undefined4 LoadHandsMaybe (undefined4 param_1) {
-		return ((undefined4 (*)(undefined4))(void*)TBL_ADDR(IDX_LoadHandsMaybe)) (param_1);
+__FORCEINLINE undefined4 AllocateHNDL_HNDR_ForChara (undefined4 chara_id) {
+		return ((undefined4 (*)(undefined4))(void*)TBL_ADDR(IDX_AllocateHNDL_HNDR_ForChara)) (chara_id);
 }
 
 __FORCEINLINE void FUN_0c1415a0 (undefined4 param_1) {
