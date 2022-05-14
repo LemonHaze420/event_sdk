@@ -8,6 +8,7 @@
 #define GLOBAL_CURR_FILE_OFFSET         0x0c020140 
 #define GLOBAL_DISKNUM_OFFSET           0x0c020164
 #define GLOBAL_AREA_OFFSET              0x0c020168
+#define GLOBAL_ENTRY_OFFSET             0x0c02016c
 #define GLOBAL_STEP_OFFSET              0x0c020178
 #define GLOBAL_TASK_CONTEXT_OFFS        0x0c0201f4
 #define EV_SCRIPT_FUNC_TBL_OFFS         0x0c020200

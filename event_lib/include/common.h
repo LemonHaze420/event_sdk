@@ -114,6 +114,13 @@ __FORCEINLINE unsigned int GetCurrentArea() {
 }
 
 /*
+     Returns the current entry of the current area.
+*/
+__FORCEINLINE unsigned int GetCurrentEntry() {
+        return *(int*)(GLOBAL_ENTRY_OFFSET);
+}
+
+/*
      Returns the current step value.
 */
 __FORCEINLINE unsigned int GetCurrentStep() {
