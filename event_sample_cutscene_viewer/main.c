@@ -202,7 +202,7 @@ static void InitCutscene(int scene_num)
 
 static void CutscenePlayStateHandler(astruct_86 *evt_ctx)
 {
-	HLib_Task_t *EVNT = EnqueueTaskWithParameter(CutsceneHandler, 0x04, 0xb, 8, FOURCC('E','V','N','T'));
+	HLib_Task_t *EVNT = EnqueueTaskWithParameter(CutsceneHandler, 0x04, 0xb, 8, EVNT);
 	astruct_89 *ppaVar2 = (astruct_89 *)GetTaskParameterPointer(EVNT);
 	ppaVar2->field0_0x0 = (astruct_88*)evt_ctx;
 	ppaVar2->field1_0x4 = 0;
