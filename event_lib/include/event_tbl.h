@@ -28,7 +28,7 @@
 #define IDX_FUN_0c093d20 						17
 #define IDX_FUN_0c093de0 						18
 #define IDX_FUN_0c093e20 						19
-#define IDX_FUN_0c093e60 						20
+#define IDX_LoadScene 						20
 #define IDX_FUN_0c16be80 						21
 #define IDX_FUN_0c0941e0 						22
 #define IDX_GetPlayerStats 						23
@@ -58,7 +58,7 @@
 #define IDX_get_controller_input 						49
 #define IDX_EVT_GetControllerInput 						50
 #define IDX_FUN_0c06c580 						51
-#define IDX_FUN_0c06d180 						52
+#define IDX_SetClockVisibility 						52
 #define IDX_FUN_0c06c4a0 						53
 #define IDX_FUN_0c06c320 						54
 #define IDX_FUN_0c06d0c0 						55
@@ -585,7 +585,7 @@
 #define IDX_FUN_0c06cdc0 						584
 #define IDX_FUN_0c194e20 						585
 #define IDX_FUN_0c144540 						586
-#define IDX_FUN_0c069dc0 						587
+#define IDX_SetPauseDisabled 						587
 #define IDX_FUN_0c069de0 						588
 #define IDX_FUN_0c0684c0 						589
 #define IDX_FUN_0c0abe80 						590
@@ -932,8 +932,8 @@ __FORCEINLINE void FUN_0c093e20 () {
 		((void (*)())(void*)TBL_ADDR(IDX_FUN_0c093e20)) ();
 }
 
-__FORCEINLINE void FUN_0c093e60 (int param_1, undefined4 param_2, undefined4 param_3) {
-		((void (*)(int, undefined4, undefined4))(void*)TBL_ADDR(IDX_FUN_0c093e60)) (param_1, param_2, param_3);
+__FORCEINLINE void LoadScene (int param_1, undefined4 param_2, undefined4 param_3) {
+		((void (*)(int, undefined4, undefined4))(void*)TBL_ADDR(IDX_LoadScene)) (param_1, param_2, param_3);
 }
 
 __FORCEINLINE void FUN_0c16be80 (char param_1) {
@@ -1052,8 +1052,8 @@ __FORCEINLINE int FUN_0c06c580 (double param_1, int param_2) {
 		return ((int (*)(double, int))(void*)TBL_ADDR(IDX_FUN_0c06c580)) (param_1, param_2);
 }
 
-__FORCEINLINE void FUN_0c06d180 (int param_1) {
-		((void (*)(int))(void*)TBL_ADDR(IDX_FUN_0c06d180)) (param_1);
+__FORCEINLINE void SetClockVisibility (int param_1) {
+		((void (*)(int))(void*)TBL_ADDR(IDX_SetClockVisibility)) (param_1);
 }
 
 __FORCEINLINE void FUN_0c06c4a0 (undefined4 param_1, undefined4 param_2, undefined4 param_3, float param_4) {
@@ -3160,8 +3160,8 @@ __FORCEINLINE undefined4 FUN_0c144540 (undefined4 param_1, undefined4 param_2_00
 		return ((undefined4 (*)(undefined4, undefined4, undefined4, undefined4, undefined8, ulonglong, int *, int, int))(void*)TBL_ADDR(IDX_FUN_0c144540)) (param_1, param_2_00, param_3_00, param_4_00, param_5, param_6, param_7, param_8, param_9);
 }
 
-__FORCEINLINE void FUN_0c069dc0 (int param_1) {
-		((void (*)(int))(void*)TBL_ADDR(IDX_FUN_0c069dc0)) (param_1);
+__FORCEINLINE void SetPauseDisabled (int param_1) {
+		((void (*)(int))(void*)TBL_ADDR(IDX_SetPauseDisabled)) (param_1);
 }
 
 __FORCEINLINE undefined4 FUN_0c069de0 (undefined4 param_1) {
