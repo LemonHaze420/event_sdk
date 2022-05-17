@@ -21,6 +21,10 @@
 
 #define ID_END                          0xFFFFFFFF
 
+// Other IDs
+#define EVNT                            FOURCC('E','V','N','T')
+
+
 // Button input values
 #define UP                              0x1000
 #define DOWN                            0x2000

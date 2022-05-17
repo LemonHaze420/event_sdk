@@ -40,7 +40,7 @@ __FORCEINLINE void load_scene(void* callbackFn, char bDevelopment)
                 FUN_0c1b0b40();                         
         }
         
-        HLib_Task_t * TASK = EnqueueTaskWithoutParameter(callbackFn, 0x04, 0xb, FOURCC('E','V','N','T'));
+        HLib_Task_t * TASK = EnqueueTaskWithoutParameter(callbackFn, 0x04, 0xb, EVNT);
         if (bDevelopment)
         {
                 FUN_0c0c01c0(0,2);                      
