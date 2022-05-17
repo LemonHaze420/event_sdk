@@ -209,7 +209,7 @@
 #define IDX_FUN_0c0ee480 						201
 #define IDX_FUN_0c0ee4a0 						202
 #define IDX_FUN_0c0ee5a0 						203
-#define IDX_FUN_0c0ee5e0 						204
+#define IDX_PlayAnimationForCharacterByID 						204
 #define IDX_FUN_0c0f1320 						205
 #define IDX_FUN_0c0f1380 						206
 #define IDX_FUN_0c0ee740 						207
@@ -1656,8 +1656,8 @@ __FORCEINLINE undefined2 FUN_0c0ee5a0 (uint param_1) {
 		return ((undefined2 (*)(uint))(void*)TBL_ADDR(IDX_FUN_0c0ee5a0)) (param_1);
 }
 
-__FORCEINLINE undefined4 FUN_0c0ee5e0 (int param_1, undefined2 param_2, uint param_3) {
-		return ((undefined4 (*)(int, undefined2, uint))(void*)TBL_ADDR(IDX_FUN_0c0ee5e0)) (param_1, param_2, param_3);
+__FORCEINLINE undefined4 PlayAnimationForCharacterByID (int param_1, undefined2 param_2, uint param_3) {
+		return ((undefined4 (*)(int, undefined2, uint))(void*)TBL_ADDR(IDX_PlayAnimationForCharacterByID)) (param_1, param_2, param_3);
 }
 
 __FORCEINLINE void FUN_0c0f1320 (int param_1) {

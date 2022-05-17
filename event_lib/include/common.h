@@ -57,10 +57,16 @@ __FORCEINLINE void LoadAfsPartition(char* szName) {
 }
 
 /* Plays an animation on a given character, provided by ID. */
+/*
+
+        ReadMotiFromDirectory(GetCurrentScene(), GetCurrentArea(), "0004A.MOT");
+        PlayAnimationForCharacterByID(CHAR, motion_id, 0);
+        PreLoadMotion(motion_id & 0xffff);
+*/
 __FORCEINLINE void PlayAnim(unsigned int chara_id, short anim_id)
 {
-        int CHAR = FindMTWK_ForCEWP(chara_id);
-        FUN_0c0ee5e0(CHAR, anim_id, 0);
+        astruct_51* CHAR = FindMTWK_ForCEWP(chara_id);
+        PlayAnimationForCharacterByID(CHAR, anim_id, 0);
 }
 
 /*   

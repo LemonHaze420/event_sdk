@@ -20,9 +20,11 @@ static short user_anim_id = 0x0;
 void _entry start(void) 
 {
         task_executed = 0;
-        user_anim_id = 0;
+        user_anim_id = 0;       
         
         load_scene(controller_input_task, 1);
+        SetClockVisibility(0);                          // 0 = disable clock, 1 = enable
+        SetPauseDisabled(1);                            // 0 = enable pausing, 1 = disable pausing
         return;
 }
 
@@ -57,12 +59,12 @@ static void controller_input_task(void) {
 #endif
         else if (controller_input & LEFT) {
                 controller_input & LB ? user_anim_id = user_anim_id - 2 : user_anim_id--;
-                if (user_anim_id == 0xFFFF)
+                if (user_anim_id == 0xFFFF || 0 > user_anim_id)
                         user_anim_id = 0;
                 sleep(1);
         } else if (controller_input & RIGHT) {
                 controller_input & LB ? user_anim_id = user_anim_id + 2 : user_anim_id++;
-                if (user_anim_id == 0xFFFF)
+                if (user_anim_id == 0xFFFF || 0 > user_anim_id)
                         user_anim_id = 0;
                 sleep(1);
         } else if (controller_input & A_BTN) {

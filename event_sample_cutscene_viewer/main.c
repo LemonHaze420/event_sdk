@@ -239,7 +239,7 @@ static void AllocateEventStorageWrapper(astruct_86 *evt_ctx)
         FUN_0c1a93c0(0, (uint *)"0517");
         FUN_0c0e9320(evt_ctx->MOTI_memblock);
         FreeTask_Wrapper(evt_ctx->pTASK);
-        FUN_0c093e60(GetCurrentScene(), FOURCC('K','W','Q','A'), 0);
+        LoadScene(GetCurrentScene(), FOURCC('K','W','Q','A'), 0);
 }
 
 static void MainStateHandler(astruct_86 *evt_ctx)

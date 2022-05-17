@@ -26,7 +26,7 @@ enum State {
         START_CUTSCENE          = 1,
         UNK_STATE               = 2,
         LOAD_STATE              = 3,
-        
+        END,
 };
 
 static void init_cutscene_viewer(void);
@@ -53,12 +53,14 @@ static astruct_193 unk_struct;
 
 static void ToggleUI(void);
 
-static undefined4 global_init = 0;
-static undefined4 global_has_loaded_flag = 0;
-static undefined4* global_chara_tbl_ptr = 0;
-static undefined4* global_load_task_ptr = 0;
-static int global_should_load_hi_poly_hands_flag = 1;
+// Defaults and variables
 
-static char bDisplay = 1;
+static undefined4       global_init                                     = 0;
+static undefined4       global_has_loaded_flag                          = 0;
+static undefined4*      global_chara_tbl_ptr                            = 0;
+static HLib_Task_t*     global_load_task_ptr                            = 0;
+static int              global_should_load_hi_poly_hands_flag           = 1;
+
+static char             bDisplay                                        = 1;
 
 #endif
