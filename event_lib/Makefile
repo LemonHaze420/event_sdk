@@ -5,6 +5,7 @@
 # `make TYPE=EV3` will produce code compliant with EV3
 # `make TYPE=MAIN` will compile the code similarly to 1ST_READ.BIN
 # `make TYPE=PHYS` will compile the code similarly to 1ST_READ.BIN (using 0x0c010000 (physical addr for 0x8c010000) as VMA)
+# Adding P to the end of EV1/2/3 will build with the 0x8c010000 **virtual** mapping (mainly only used on Retail)
 TYPE=EV1
 
 PHYS    := 0x0c010000
@@ -42,6 +43,10 @@ endif
 
 CC=sh4-elf-gcc
 CFLAGS=-O2 -ml -m4 -T ../event_lib/linker.x -nostartfiles -nostdlib -Wno-builtin-declaration-mismatch -I./ -I/usr/include/ -I../event_lib/include -Ttext=$(VMA) 
+
+ifeq ($(RETAIL), 1)
+        CFLAGS += -DRETAIL_MEMORY
+endif
 
 ifeq ($(TYPE), ANY)
         CFLAGS += -fpic
