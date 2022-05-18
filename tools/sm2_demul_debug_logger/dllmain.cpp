@@ -9,6 +9,8 @@ std::string previous_log;
 
 // Whether this is the US or GameJam build
 static bool bUSBuild = false;
+static bool bJPRetail = false;
+static bool bGameJamBuild = false;
 
 void init()
 {
@@ -23,14 +25,20 @@ void main_loop()
 		bUSBuild = true;
 		printf("US - Sep 12 2001 11:29:25\n");
 	}
-	else if (CHECK(GAMEJAM_TIMESTAMP_ADDR, int, GAMEJAM_TIMESTAMP)) {
-		bUSBuild = false;
+	if (CHECK(GAMEJAM_TIMESTAMP_ADDR, int, GAMEJAM_TIMESTAMP)) {
+		bGameJamBuild = true;
 		printf("GameJam - Nov  6 2000 13:05:30\n");
 
 		// enable debug menu at main menu asap..
 		CHECK_AND_PATCH(GAMEJAM_DEBUG_ENABLE_PATCH_OFFSET, short, GAMEJAM_DEBUG_ENABLE_PATCH);
-
-	} else {
+	}
+	if (CHECK(JP_RETAIL_TIMESTAMP_ADDR, int, JP_RETAIL_TIMESTAMP)) {
+		bJPRetail = true;
+		printf("JP Retail - Jul 11 2001 22:40:13\n");
+	}
+	
+	
+	if (!bJPRetail && !bUSBuild && !bGameJamBuild) {
 		// thread ends here cause we return
 		MessageBox(NULL, L"Unsupported executable.", APP_STR, MB_OK);
 		return;
@@ -38,7 +46,7 @@ void main_loop()
 
 	while (true) {		
 		// init
-		char* curr_msgbuf = (char*)(executableBase + (bUSBuild ? SM2_SCREEN_DEBUG_TEXT_BUFFER_US : SM2_SCREEN_DEBUG_TEXT_BUFFER_GAMEJAM));
+		char* curr_msgbuf = (char*)(executableBase + (bUSBuild ? SM2_SCREEN_DEBUG_TEXT_BUFFER_US : bJPRetail ? SM2_SCREEN_DEBUG_TEXT_BUFFER_JP_RETAIL : SM2_SCREEN_DEBUG_TEXT_BUFFER_GAMEJAM));
 		char* msg_buffer = new char[LOG_BUFFER_SIZE];
 		memset(msg_buffer, 0x00, LOG_BUFFER_SIZE);
 
@@ -64,8 +72,9 @@ void main_loop()
 			// print to logfile..
 			std::ofstream outputLog("sm2.debug.log", std::ios::app);
 			if (outputLog.good()) {
-				if (bUSBuild)	outputLog << "[US_Build]";
-				else			outputLog << "[GameJam_Build]";
+				if (bUSBuild)			outputLog << "[US_Build]";
+				else if(bGameJamBuild)	outputLog << "[GameJam_Build]";
+				else if(bJPRetail)		outputLog << "[JP_Retail]";
 
 				outputLog << t << " " << previous_log << std::endl;
 				outputLog.close();
@@ -75,10 +84,16 @@ void main_loop()
 		}
 		
 		// patch ShenmueScript table of functions
-		CHECK_AND_PATCH(SM2_DEBUG_LOG_TO_CONSOLE_TABLE_ENTRY,	 int,	(bUSBuild ? SM2_DEBUG_LOG_TO_SCREEN_ADDRESS_US : SM2_DEBUG_LOG_TO_SCREEN_ADDRESS_GAMEJAM));
-		CHECK_AND_PATCH(SM2_DEBUG_LOG_TO_CONSOLE_TABLE_ENTRY_2,  int,	(bUSBuild ? SM2_DEBUG_LOG_TO_SCREEN_ADDRESS_US : SM2_DEBUG_LOG_TO_SCREEN_ADDRESS_GAMEJAM));
+		CHECK_AND_PATCH(SM2_DEBUG_LOG_TO_CONSOLE_TABLE_ENTRY,	 int,	(bUSBuild ? SM2_DEBUG_LOG_TO_SCREEN_ADDRESS_US : bJPRetail ? SM2_DEBUG_LOG_TO_SCREEN_ADDRESS_JP_RETAIL : SM2_DEBUG_LOG_TO_SCREEN_ADDRESS_GAMEJAM));
+		CHECK_AND_PATCH(SM2_DEBUG_LOG_TO_CONSOLE_TABLE_ENTRY_2,  int,	(bUSBuild ? SM2_DEBUG_LOG_TO_SCREEN_ADDRESS_US : bJPRetail ? SM2_DEBUG_LOG_TO_SCREEN_ADDRESS_JP_RETAIL : SM2_DEBUG_LOG_TO_SCREEN_ADDRESS_GAMEJAM));
 		
-		if (!bUSBuild) {
+		if (bJPRetail) {
+			CHECK_AND_PATCH(SM2_SET_DEBUG_TEXT_POSITION_ENTRY,		int,	SM2_SET_DEBUG_TEXT_POSITION_ADDRESS_JP_RETAIL);
+			CHECK_AND_PATCH(SM2_DEBUG_LOG_TO_SCREEN_TABLE_ENTRY,	int,	SM2_DEBUG_LOG_TO_SCREEN_ADDRESS_JP_RETAIL);
+		}
+
+		
+		if (bGameJamBuild) {
 			// enable debug menu at main menu
 			CHECK_AND_PATCH(GAMEJAM_DEBUG_ENABLE_PATCH_OFFSET, short, GAMEJAM_DEBUG_ENABLE_PATCH);
 		}
