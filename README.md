@@ -6,12 +6,12 @@ This repository provides tools which will allow a developer to write their own E
 ## Prerequisites
 
   [gcc-11.3.0](https://mirrorservice.org/sites/sourceware.org/pub/gcc/releases/gcc-11.3.0/gcc-11.3.0.tar.gz)
-  
+
   [binutils-2.38](https://ftp.gnu.org/gnu/binutils/binutils-2.38.tar.gz)
   
 ## Setup
   
- 1. Retrieve and unpack the above source code and insert the following lines into `~/.bashrc`
+ 1. Retrieve and unpack the above source code and insert the following lines into `~/.bashrc`, using something like `nano ~/.bashrc`.
     ```
     export PREFIX="$HOME/opt/dc"
     export TARGET=sh4-elf
@@ -60,9 +60,15 @@ an EV2:
 an EV3:
 
       make -j TYPE=EV3
+      
+These commands will build EV* scripts which use the physical address of the Dreamcast system RAM. This doesn't work for Retail builds of the game for obvious reasons and so to compile and run EV* scripts for use on Retail builds of the game, it's necessary to add `RETAIL=1` to the `make` command and to also add a 'P' to the `TYPE` name, for example, to build an EV3 for use on a Retail build:-
+
+      make -j TYPE=EV3P RETAIL=1
     
     
 ## Development
+
+Initial testing with the toolchain indicated that `-fPIC` seems to be working for the most part, but this needs more testing. It may be possible to alleviate the need of ensuring the scripts are compiled with the relevant VMA through the use of `-fPIC`.
 
 There are a few limitations and unresolved issues which still require some work. 
 
