@@ -14,6 +14,10 @@ EV1_VMA := 0x0c328000
 EV2_VMA := 0x0c338000
 EV3_VMA := 0x0c348000
 
+EV1P_VMA := 0x8c328000
+EV2P_VMA := 0x8c338000
+EV3P_VMA := 0x8c348000
+
 VMA     := $(EV3_VMA)
 
 ifeq ($(TYPE), EV3)
@@ -21,7 +25,13 @@ ifeq ($(TYPE), EV3)
 else ifeq ($(TYPE), EV2)
         VMA := $(EV2_VMA)
 else ifeq ($(TYPE), EV1)
-        VMA := $(EV1_VMA)
+        VMA := $(EV1_VMA)   
+else ifeq ($(TYPE), EV3P)
+        VMA := $(EV3P_VMA)
+else ifeq ($(TYPE), EV2P)
+        VMA := $(EV2P_VMA)
+else ifeq ($(TYPE), EV1P)
+        VMA := $(EV1P_VMA)
 else ifeq ($(TYPE), MAIN)
         VMA := $(MAIN)
 else ifeq ($(TYPE), ANY)

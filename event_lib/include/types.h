@@ -1,17 +1,23 @@
 #ifndef _TYPES_H_
 #define _TYPES_H_
 
-#define GLOBAL_TAKE_OFFSET              0x0c020100
-#define GLOBAL_CURR_TASK_OFFSET         0x0c020110
-#define GLOBAL_SCENE_OFFSET             0x0c020118
-#define GLOBAL_CURR_DIRE_OFFSET         0x0c020120
-#define GLOBAL_CURR_FILE_OFFSET         0x0c020140 
-#define GLOBAL_DISKNUM_OFFSET           0x0c020164
-#define GLOBAL_AREA_OFFSET              0x0c020168
-#define GLOBAL_ENTRY_OFFSET             0x0c02016c
-#define GLOBAL_STEP_OFFSET              0x0c020178
-#define GLOBAL_TASK_CONTEXT_OFFS        0x0c0201f4
-#define EV_SCRIPT_FUNC_TBL_OFFS         0x0c020200
+#ifndef RETAIL_MEMORY
+        #define OFFSET                          0x0  
+#else
+        #define OFFSET                          0x80000000
+#endif
+
+#define GLOBAL_TAKE_OFFSET              (OFFSET+0x0c020100)
+#define GLOBAL_CURR_TASK_OFFSET         (OFFSET+0x0c020110)
+#define GLOBAL_SCENE_OFFSET             (OFFSET+0x0c020118)
+#define GLOBAL_CURR_DIRE_OFFSET         (OFFSET+0x0c020120)
+#define GLOBAL_CURR_FILE_OFFSET         (OFFSET+0x0c020140) 
+#define GLOBAL_DISKNUM_OFFSET           (OFFSET+0x0c020164)
+#define GLOBAL_AREA_OFFSET              (OFFSET+0x0c020168)
+#define GLOBAL_ENTRY_OFFSET             (OFFSET+0x0c02016c)
+#define GLOBAL_STEP_OFFSET              (OFFSET+0x0c020178)
+#define GLOBAL_TASK_CONTEXT_OFFS        (OFFSET+0x0c0201f4)
+#define EV_SCRIPT_FUNC_TBL_OFFS         (OFFSET+0x0c020200)
 
 #define TBL_ADDR(f)                     *(int*)((EV_SCRIPT_FUNC_TBL_OFFS+(f*4)))
 
