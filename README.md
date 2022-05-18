@@ -49,21 +49,18 @@ Building the scripts is as easy as invoking `make` in a directory containing the
 
 an EV1:
 
-    ```
       make -j TYPE=EV1
-    ```
+    
     
 an EV2:
 
-    ```
       make -j TYPE=EV2
-    ```
+    
     
 an EV3:
 
-    ```
       make -j TYPE=EV3
-    ```
+    
     
 ## Development
 
