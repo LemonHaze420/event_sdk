@@ -1,21 +1,21 @@
 ENTRY(_start)
 SECTIONS
 {
-    .text :
-    {
-        *(.text.main);
-        *(.text*);
-    }
-    .rodata :
-    {
-        *(.rodata*);
-    }    
-    .data :
-    {
-        *(.data*);
-    }
-    .bss :
-    {
-        *(.bss*);
-    }    
+  .text : {
+    code = .;
+    *(.text.main);
+    *(.text)
+    *(.rodata)
+  }
+  .data :
+  {
+    data = .;
+    *(.data)
+  } 
+  .bss :
+  {
+    bss = .;
+    *(.bss)
+  }
+  end = .;
 }
