@@ -4,6 +4,20 @@
 #define MIN_CUTSCENE_ID         0
 #define MAX_CUTSCENE_ID         4
 
+#define KWQA                    FOURCC('K', 'W', 'Q', 'A')
+
+#define l141                    FOURCC('l','1','4','1')
+#define l151                    FOURCC('l','1','5','1')
+
+#define a988                    FOURCC('a','9','8','8')
+#define a990                    FOURCC('a','9','9','0')
+#define a992                    FOURCC('a','9','9','2')
+#define a994                    FOURCC('a','9','9','4')
+#define a840                    FOURCC('a','8','4','0')
+#define a842                    FOURCC('a','8','4','2')
+#define a844                    FOURCC('a','8','4','4')
+#define a848                    FOURCC('a','8','4','8')
+
 #define MAP1_NAME               "KWW1"
 #define MAP2_NAME               "KWA1"
 #define MAP3_NAME               "KWA2"

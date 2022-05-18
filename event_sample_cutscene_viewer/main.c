@@ -75,14 +75,14 @@ static void SetCEWP_MTWK_FlagTo0_Wrapper(void)
 	SetCEWP_MTWK_FlagTo0(RYO_);
 	SetCEWP_MTWK_FlagTo0(SIN_);
         
-	EV_UnknownFunc(FOURCC('a','9','8','8'));
-	EV_UnknownFunc(FOURCC('a','9','9','0'));
-	EV_UnknownFunc(FOURCC('a','9','9','2'));
-	EV_UnknownFunc(FOURCC('a','9','9','4'));
-	EV_UnknownFunc(FOURCC('a','8','4','0'));
-	EV_UnknownFunc(FOURCC('a','8','4','2'));
-	EV_UnknownFunc(FOURCC('a','8','4','4'));
-	EV_UnknownFunc(FOURCC('a','8','4','8'));
+	EV_UnknownFunc(a988);
+	EV_UnknownFunc(a990);
+	EV_UnknownFunc(a992);
+	EV_UnknownFunc(a994);
+	EV_UnknownFunc(a840);
+	EV_UnknownFunc(a842);
+	EV_UnknownFunc(a844);
+	EV_UnknownFunc(a848);
 	return;
 }
 
@@ -91,14 +91,14 @@ static void SetCEWP_MTWK_FlagTo2_Wrapper(void)
 	SetCEWP_MTWK_FlagTo2(RYO_);
 	SetCEWP_MTWK_FlagTo2(SIN_);
         
-	EV_UnknownFunc(FOURCC('a','9','8','8'));
-	EV_UnknownFunc(FOURCC('a','9','9','0'));
-	EV_UnknownFunc(FOURCC('a','9','9','2'));
-	EV_UnknownFunc(FOURCC('a','9','9','4'));
-	EV_UnknownFunc(FOURCC('a','8','4','0'));
-	EV_UnknownFunc(FOURCC('a','8','4','2'));
-	EV_UnknownFunc(FOURCC('a','8','4','4'));
-	EV_UnknownFunc(FOURCC('a','8','4','8'));
+	EV_UnknownFunc(a988);
+	EV_UnknownFunc(a990);
+	EV_UnknownFunc(a992);
+	EV_UnknownFunc(a994);
+	EV_UnknownFunc(a840);
+	EV_UnknownFunc(a842);
+	EV_UnknownFunc(a844);
+	EV_UnknownFunc(a848);
 	return;
 }
 
@@ -181,7 +181,8 @@ static void InitCutscene(int scene_num)
 	else {
 		if (scene_num == 3) {
 			FUN_0c094520(0xc, 0);
-			uVar1 = FOURCC('l','1','4','1');
+                        
+			uVar1 = l141;
 		}
 		else {
 			if (scene_num != 4) {
@@ -191,7 +192,7 @@ static void InitCutscene(int scene_num)
 				return;
 			}
 			FUN_0c094520(0xc, 0);
-			uVar1 = FOURCC('l','1','5','1');
+			uVar1 = l151;
 		}
                 uVar2 = 0;
 		FUN_0c0c1cc0(uVar1, uVar2);
@@ -236,10 +237,10 @@ void UnloadCharactersInTable(int *param_1)
 static void AllocateEventStorageWrapper(astruct_86 *evt_ctx)
 {
         UnloadCharactersInTable(&character_tbl);
-        FUN_0c1a93c0(0, (uint *)"0517");
+        FUN_0c1a93c0(0, (uint *)SEQ_NAME);
         FUN_0c0e9320(evt_ctx->MOTI_memblock);
         FreeTask_Wrapper(evt_ctx->pTASK);
-        LoadScene(GetCurrentScene(), FOURCC('K','W','Q','A'), 0);
+        LoadScene(GetCurrentScene(), KWQA, 0);
 }
 
 static void MainStateHandler(astruct_86 *evt_ctx)
