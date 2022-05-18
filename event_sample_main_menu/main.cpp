@@ -24,9 +24,9 @@ void _entry start(void)
 {
         // This is also needed, unless 1ST_READ has been patched, or sm2_demul_logger is used.
         #ifdef RETAIL_MEMORY
-                *(int*)(addr)0x8c020298 = 0x8c1e4220;            // patch in debug_log_to_file_REMOVED, replacing it for the screen func
-                *(int*)(addr)0x8c0202a0 = 0x8c1e4220;            // patch back in debug_log_to_screen
-                *(int*)(addr)0x8c02029c = 0x8c1e4120;            // patch back in set_debug_screen_text_position
+                *(int*)(0x8c020298) = 0x8c1e4220;            // patch in debug_log_to_file_REMOVED, replacing it for the screen func
+                *(int*)(0x8c0202a0) = 0x8c1e4220;            // patch back in debug_log_to_screen
+                *(int*)(0x8c02029c) = 0x8c1e4120;            // patch back in set_debug_screen_text_position
         #endif
 
         LOG("LemonHaze - 2022\n");
