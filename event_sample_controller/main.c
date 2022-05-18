@@ -43,7 +43,7 @@ static void ToggleUI()
 #endif
 
 static void controller_input_task(void) {
-        uint controller_input = EVT_GetControllerInput(0,0);
+        uint controller_input = get_controller_input(1);
         set_debug_screen_text_position(4,4);
         debug_log_to_screen("task_executed      = 0x%x\n",      task_executed);
         debug_log_to_screen("controller_input   = 0x%x\n",      controller_input);
