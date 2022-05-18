@@ -203,8 +203,8 @@ static void InitCutscene(int scene_num)
 
 static void CutscenePlayStateHandler(astruct_86 *evt_ctx)
 {
-	HLib_Task_t *EVNT = EnqueueTaskWithParameter(CutsceneHandler, 0x04, 0xb, 8, EVNT);
-	astruct_89 *ppaVar2 = (astruct_89 *)GetTaskParameterPointer(EVNT);
+	HLib_Task_t *EVNT_Task = EnqueueTaskWithParameter(CutsceneHandler, 0x04, 0xb, 8, EVNT);
+	astruct_89 *ppaVar2 = (astruct_89 *)GetTaskParameterPointer(EVNT_Task);
 	ppaVar2->field0_0x0 = (astruct_88*)evt_ctx;
 	ppaVar2->field1_0x4 = 0;
 	if (evt_ctx->scene_num == 3) {
@@ -393,9 +393,9 @@ static void EnqueueLoad(undefined4 chara_tbl, HLib_Task_t* TASK)
 
 void init_cutscene_viewer(void)
 {
-        HLib_Task_t* EVNT = EnqueueTaskWithParameter(MainStateHandler, 0x04, 0xb, 0xc, CVWR_NAME);
-        astruct_86 * EVNT_params = (astruct_86 *)GetTaskParameterPointer(EVNT);
-        EVNT_params->pTASK = EVNT;
+        HLib_Task_t* EVNT_Task = EnqueueTaskWithParameter(MainStateHandler, 0x04, 0xb, 0xc, CVWR_NAME);
+        astruct_86 * EVNT_params = (astruct_86 *)GetTaskParameterPointer(EVNT_Task);
+        EVNT_params->pTASK = EVNT_Task;
         g_evt_ctx = EVNT_params;
         
         int MOTI = ReadMotiFromDirectory(GetCurrentScene(), GetCurrentArea(), MOT_NAME);  
