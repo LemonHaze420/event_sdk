@@ -9,6 +9,8 @@ This repository provides tools which will allow a developer to write their own E
 
   [binutils-2.38](https://ftp.gnu.org/gnu/binutils/binutils-2.38.tar.gz)
   
+  `sudo apt-get install binutils-dev build-essential gcc g++ make cmake makeinfo patch flex bison gettext libgmp-dev libgmp4-dev libmpc-dev libmpfr-dev`
+  
 ## Setup
   
  1. Retrieve and unpack the above source code and insert the following lines into `~/.bashrc`, using something like `nano ~/.bashrc`.
@@ -17,8 +19,9 @@ This repository provides tools which will allow a developer to write their own E
     export TARGET=sh4-elf
     export PATH="$PREFIX/bin:$PATH"
     ```
+ 2. Either restart your terminal or execute `. ~/.bashrc` to make the above changes take effect immediately and run 
 
- 2. Execute the following commands to build and install binutils:
+ 3. Execute the following commands to build and install binutils:
     ```
     cd binutils-2.38
     mkdir build
@@ -28,7 +31,7 @@ This repository provides tools which will allow a developer to write their own E
     make -j install
     ```
 
- 3. Execute the following commands to build and install gcc:
+ 4. Execute the following commands to build and install gcc:
     ```
     cd gcc-11.3.0
     contrib/download_prerequisites
