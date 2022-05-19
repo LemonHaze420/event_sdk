@@ -21,6 +21,10 @@ This repository provides tools which will allow a developer to write their own E
     ```
  2. Either restart your terminal or execute `. ~/.bashrc` to make the above changes take effect immediately and run 
 
+    ```
+    sudo apt-get -y update && sudo apt-get -y upgrade
+    ```
+
  3. Execute the following commands to build and install binutils:
     ```
     cd binutils-2.38
