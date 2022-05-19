@@ -1,6 +1,3 @@
-// We need to define this (or compile with `make TYPE=EV3P RETAIL=1`), so that the library uses the proper addressing
-///#define RETAIL_MEMORY
-
 #include "common.h"
 
 #define VIEW                    FOURCC('V','I','E','W')
@@ -177,7 +174,7 @@ void _entry start(void)
         current_selection = 0x0;
         current_entry_sel = 0x0;
         
-        // This is also needed, unless 1ST_READ has been patched, or sm2_demul_logger is used.
+        // This is needed unless 1ST_READ has been patched, or sm2_demul_logger is used, or we don't wanna run on the JP retail build
         #ifdef RETAIL_MEMORY
                 *(int*)(0x8c020298) = 0x8c1e4220;            // patch in debug_log_to_file_REMOVED, replacing it for the screen func
                 *(int*)(0x8c0202a0) = 0x8c1e4220;            // patch back in debug_log_to_screen
