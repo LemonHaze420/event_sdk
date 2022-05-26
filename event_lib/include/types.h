@@ -162,6 +162,44 @@
 
 #define RT                              0x8
 
+enum {
+        Sunny = 0,
+        Cloudy = 1,
+        Rain = 2,
+};
+
+struct Vector2f {
+        float x,y;
+};
+
+struct Vector2i {
+        short x,y;
+};
+
+struct Vector3i {
+        short x,y,z;
+};
+
+struct Vector3f {
+        float x,y,z;
+};
+
+struct Vector4i {
+        short w,x,y,z;
+};
+
+struct Vector4f {
+        float w,x,y,z;
+};
+
+struct Matrix4x3f {
+        float m[4][3];
+};
+
+struct Matrix4x4f {
+        float m[4][4];
+};
+
 typedef unsigned char                   undefined;
 typedef unsigned char                   bool;
 typedef unsigned char                   byte;
@@ -5884,8 +5922,6 @@ struct astruct_126 {
 
 typedef struct astruct_95 astruct_95, *Pastruct_95;
 
-typedef struct astruct_58 astruct_58, *Pastruct_58;
-
 typedef struct astruct_62 astruct_62, *Pastruct_62;
 
 struct astruct_62 {
@@ -6098,6 +6134,16 @@ struct astruct_95 {
     undefined field191_0x119;
     undefined field192_0x11a;
     undefined field193_0x11b;
+};
+
+typedef struct astruct_195 astruct_195, *Pastruct_195;
+
+typedef struct astruct_58 astruct_58, *Pastruct_58;
+
+struct astruct_195 {
+    struct astruct_58 * field0_0x0;
+    struct astruct_58 * field1_0x4;
+    int field2_0x8;
 };
 
 struct astruct_58 {
