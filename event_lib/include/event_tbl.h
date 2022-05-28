@@ -183,7 +183,7 @@
 #define IDX_FUN_0c18dca0 						177
 #define IDX_FUN_0c18dea0 						178
 #define IDX_FUN_0c18dee0 						179
-#define IDX_FUN_0c18e680 						180
+#define IDX_LoadBlurModel 						180
 #define IDX_FUN_0c190200 						181
 #define IDX_FUN_0c18ff00 						182
 #define IDX_FUN_0c18e5e0 						183
@@ -882,8 +882,8 @@ __FORCEINLINE bool FUN_0c0ffe80 (int param_1) {
 		return ((bool (*)(int))(void*)TBL_ADDR(IDX_FUN_0c0ffe80)) (param_1);
 }
 
-__FORCEINLINE undefined4 FUN_0c100100 (int param_1) {
-		return ((undefined4 (*)(int))(void*)TBL_ADDR(IDX_FUN_0c100100)) (param_1);
+__FORCEINLINE undefined4 FUN_0c100100 (int chara_id) {
+		return ((undefined4 (*)(int))(void*)TBL_ADDR(IDX_FUN_0c100100)) (chara_id);
 }
 
 __FORCEINLINE undefined4 FUN_0c1001a0 (int param_1) {
@@ -1486,8 +1486,8 @@ __FORCEINLINE void FUN_0c0989c0 (undefined4 param_1, uint param_2, uint param_3)
 		((void (*)(undefined4, uint, uint))(void*)TBL_ADDR(IDX_FUN_0c0989c0)) (param_1, param_2, param_3);
 }
 
-__FORCEINLINE undefined4 EV_CreateCharacter (int param_1, int param_2, int param_3) {
-		return ((undefined4 (*)(int, int, int))(void*)TBL_ADDR(IDX_EV_CreateCharacter)) (param_1, param_2, param_3);
+__FORCEINLINE undefined4 EV_CreateCharacter (int chara_type, int bShouldInitImg, int chara_id) {
+		return ((undefined4 (*)(int, int, int))(void*)TBL_ADDR(IDX_EV_CreateCharacter)) (chara_type, bShouldInitImg, chara_id);
 }
 
 __FORCEINLINE void FUN_0c093040 () {
@@ -1550,8 +1550,8 @@ __FORCEINLINE void FUN_0c18dee0 (undefined4 param_1, undefined4 param_2, undefin
 		((void (*)(undefined4, undefined4, undefined4, undefined4, uint, undefined, undefined2, undefined2))(void*)TBL_ADDR(IDX_FUN_0c18dee0)) (param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8);
 }
 
-__FORCEINLINE void FUN_0c18e680 (uint param_1, undefined4 param_2, undefined4 param_3, undefined4 param_4, undefined4 param_5, undefined4 param_6, double param_7, uint param_8, byte param_9, char param_10, undefined4 param_11) {
-		((void (*)(uint, undefined4, undefined4, undefined4, undefined4, undefined4, double, uint, byte, char, undefined4))(void*)TBL_ADDR(IDX_FUN_0c18e680)) (param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10, param_11);
+__FORCEINLINE void LoadBlurModel (uint param_1, undefined4 param_2, undefined4 param_3, undefined4 param_4, undefined4 param_5, undefined4 param_6, double param_7, uint param_8, byte param_9, char param_10, undefined4 param_11) {
+		((void (*)(uint, undefined4, undefined4, undefined4, undefined4, undefined4, double, uint, byte, char, undefined4))(void*)TBL_ADDR(IDX_LoadBlurModel)) (param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10, param_11);
 }
 
 __FORCEINLINE bool FUN_0c190200 () {
@@ -1562,8 +1562,8 @@ __FORCEINLINE uint FUN_0c18ff00 (int param_1) {
 		return ((uint (*)(int))(void*)TBL_ADDR(IDX_FUN_0c18ff00)) (param_1);
 }
 
-__FORCEINLINE void FUN_0c18e5e0 (undefined4 param_1, undefined4 param_2, undefined4 param_3, uint param_4, char param_5, astruct_29 * param_6) {
-		((void (*)(undefined4, undefined4, undefined4, uint, char, astruct_29 *))(void*)TBL_ADDR(IDX_FUN_0c18e5e0)) (param_1, param_2, param_3, param_4, param_5, param_6);
+__FORCEINLINE void FUN_0c18e5e0 (char param_1, astruct_29 * param_2) {
+		((void (*)(char, astruct_29 *))(void*)TBL_ADDR(IDX_FUN_0c18e5e0)) (param_1, param_2);
 }
 
 __FORCEINLINE void FUN_0c18e140 (int param_1, char param_2, undefined * param_3, uint param_4) {
@@ -3014,8 +3014,8 @@ __FORCEINLINE undefined4 FUN_0c1404a0 (undefined4 param_1, undefined4 param_2, u
 		return ((undefined4 (*)(undefined4, undefined4, undefined4, undefined4, undefined4, undefined4, undefined4, int))(void*)TBL_ADDR(IDX_FUN_0c1404a0)) (param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8);
 }
 
-__FORCEINLINE undefined4 FUN_0c1405e0 (int param_1) {
-		return ((undefined4 (*)(int))(void*)TBL_ADDR(IDX_FUN_0c1405e0)) (param_1);
+__FORCEINLINE undefined4 FUN_0c1405e0 (int chara_id) {
+		return ((undefined4 (*)(int))(void*)TBL_ADDR(IDX_FUN_0c1405e0)) (chara_id);
 }
 
 __FORCEINLINE undefined4 FUN_0c140640 (int param_1) {
