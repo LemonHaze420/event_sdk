@@ -112,11 +112,11 @@ static void CutsceneHandler(astruct_86 *evt_ctx)
 			FreeTask(evt_ctx->pTASK);
 		}
 		if (*(short *)&evt_ctx->pTASK->field5_0x8 == 0) {
-			FUN_0c093d20();
+			FUN_0c093d20(0x1e,0,0,0);
 			SetTaskDestroyCallback(evt_ctx->pTASK, (undefined *)0x1e);
 		}
 		else {
-			FUN_0c093d20();
+			FUN_0c093d20(0,0,0,0);
 		}
 		FUN_0c054200();
 	}
@@ -213,7 +213,7 @@ static void CutscenePlayStateHandler(astruct_86 *evt_ctx)
 	FUN_0c1b0ce0();
         FUN_0c1afdc0(1,0,0);
 	FUN_0c1b0b40();
-	FUN_0c093d20();
+	FUN_0c093d20(0x1e,0xff,0,0);
 	SetCEWP_MTWK_FlagTo2_Wrapper();
 	FUN_0c1542c0((int)(short)evt_ctx->scene_num);
 	evt_ctx->cur_state = UNK_STATE;
@@ -312,7 +312,7 @@ void LoadWCONDBin(void)
         FUN_0c1a93c0(1, (uint *)SEQ_NAME);
         
         char* path = Filepath_Generator(SceneDirectory);
-        LoadFile_Wrapper(path, W_COND_N);
+        LoadWeatherScenarioData(path, W_COND_N);
         return;
 }
 
@@ -331,9 +331,9 @@ static void ToggleUI()
 static void SetEnableCharacterFlags(int chara_id)
 {
         EV_EnableCharDisplay(chara_id);
-        FUN_0c077280();
-        FUN_0c077280();
-        FUN_0c092520();
+        FUN_0c077280(2, 0);
+        FUN_0c077280(3, 0);
+        FUN_0c092520(1);
         EV_UnknownFunc(chara_id);
         return;
 }
