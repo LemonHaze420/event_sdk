@@ -33,7 +33,7 @@ NOTE: Some users have reported issues when running `make -j` (all cores), change
     cd binutils-2.38
     mkdir build
     cd build
-    ../configure --target=$TARGET --prefix="$PREFIX" --with-sysroot --disable-nls --disable-werror
+    ../configure --target=$TARGET --prefix="$PREFIX" --with-sysroot --disable-nls --disable-werror --disable-libssp --disable-tls --disable-shared --enable-static
     make -j
     make -j install
     ```
@@ -44,7 +44,7 @@ NOTE: Some users have reported issues when running `make -j` (all cores), change
     contrib/download_prerequisites
     mkdir build
     cd build
-    ../configure --target=$TARGET --prefix="$PREFIX" --disable-nls --enable-languages=c,c++ --without-headers
+    ../configure --target=$TARGET --prefix="$PREFIX" --enable-checking=release --enable-languages=c,c++ --with-cpu=m4-single-only --with-multilib-list=m4-single-only,m4-nofpu,m4 --with-endian=little --without-headers --disable-libssp --disable-tls --disable-shared --enable-static --disable-nls
     make -j all-gcc
     make -j all-target-libgcc
     make -j install-gcc
