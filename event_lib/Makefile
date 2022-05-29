@@ -42,7 +42,7 @@ else
 endif
 
 CC=sh4-elf-gcc
-CFLAGS=-O2 -ml -m4 -T ../event_lib/linker.x -nostartfiles -nostdlib -Wno-builtin-declaration-mismatch -I./ -I/usr/include/ -I../event_lib/include -Ttext=$(VMA) 
+CFLAGS=-O2 -ml -m4-single-only -ffreestanding -fno-strict-aliasing -T ../event_lib/linker.x -nostartfiles -nostdlib -Wno-builtin-declaration-mismatch -I./ -I/usr/include/ -I../event_lib/include -Ttext=$(VMA) 
 
 ifeq ($(RETAIL), 1)
         CFLAGS += -DRETAIL_MEMORY

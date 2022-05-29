@@ -2,6 +2,7 @@
 #define _COMMON_H
 #include "mem.h"
 #include "event_tbl.h"
+#include <stdarg.h>
 
 #define _entry                  __attribute__((section(".text.main"))) 
 
@@ -14,24 +15,27 @@
 /* Calls a function provided by address with variadic arguments, useful for development. */
 static void callFn(void* pFunc, ...)   
 {
-        void *arg = (void*)(__builtin_apply_args() + 0x4);      // skip first argument
-        void *ret = __builtin_apply(pFunc, arg, 512);
-        __builtin_return(ret);
+        va_list args;
+        va_start(args, pFunc);
+        // ((void (*) (...) ) (pFunc))         (args);                 // call out to the func...
+        va_end(args);       
 }
 
 /* These functions cannot be inlined, by nature. */
 static void debug_log_to_file_REMOVED(char* szFormat, ...)   
 {
-        void *arg = __builtin_apply_args();
-        void *ret = __builtin_apply((void*)TBL_ADDR(38), arg, 100);
-        __builtin_return(ret);
+        va_list args;
+        va_start(args, szFormat);
+        ((void (*) (char*,...) ) (void*) (TBL_ADDR(38)))         (szFormat, args);                 // call out to the func...
+        va_end(args);        
 }
 
 static void debug_log_to_screen(char* szFormat, ...)   
 {
-        void *arg = __builtin_apply_args();
-        void *ret = __builtin_apply((void*)TBL_ADDR(40), arg, 100);
-        __builtin_return(ret);
+        va_list args;
+        va_start(args, szFormat);
+        ((void (*) (char*,...) ) (void*) (TBL_ADDR(40)))         (szFormat, args);                 // call out to the func...
+        va_end(args);
 }
 
 /* Initializes the currently loaded scene and completes loading, then queues up a task with 
